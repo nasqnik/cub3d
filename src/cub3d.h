@@ -5,6 +5,7 @@
 # include "../lib/ft_printf/ft_printf.h"
 
 # include "../mlx/mlx.h"
+# include <fcntl.h>
 
 # define MAP_WIDTH 8 // example map width
 # define MAP_HEIGHT 8 // example map hight
@@ -33,9 +34,15 @@ typedef struct s_info
 
 	void		*mlx;
 	t_window	win;
-
 	char		*map_name;		// map name from argument av[1]
-	char		**map;          // real map
+	int			row_count;
+	int			line_max_length;
+	char		**file_copy;          // local copy
+	char		*NO_path;
+	char		*SO_path;
+	char		*WE_path;
+	char		*EA_path;
+	int			*F_color;
 	int			map_width;      // real map width
 	int			map_height;     // real map height
 }			t_info;

@@ -31,63 +31,157 @@
 
 void initialize_mlx(t_info *info)
 {
-    info->mlx = mlx_init();
+	info->mlx = mlx_init();
 
-    info->win.x = WINDOW_WIDTH;         // example window width, change after parsing
-    info->win.y = WINDOW_HEIGHT;        // example window height, change after parsing
+	info->win.x = WINDOW_WIDTH;	 // example window width, change after parsing
+	info->win.y = WINDOW_HEIGHT;	// example window height, change after parsing
 
-    if (!info->mlx)
-        error("mlx_init failed in initialize_mlx", info);
-    info->win.mlx_win = mlx_new_window(info->mlx,
-            info->win.x, info->win.y, "cub3D");
-    if (!info->win.mlx_win)
-        error("mlx_new_window failed in initialize_mlx", info);
+	if (!info->mlx)
+		error("mlx_init failed in initialize_mlx", info);
+	info->win.mlx_win = mlx_new_window(info->mlx,
+			info->win.x, info->win.y, "cub3D");
+	if (!info->win.mlx_win)
+		error("mlx_new_window failed in initialize_mlx", info);
 }
 
-void initialize_map(t_info *info)
-{
-    info->map = NULL;                   // real map   
+// void initialize_map(t_info *info)
+// {
+//	 info->map = NULL;                   // real map   
 
-    // info->example_map = random_map;     // example map
+//     // info->example_map = random_map;     // example map
 
-    info->map_width = MAP_WIDTH;        // change after parsing
-    info->map_height = MAP_HEIGHT;      // change after parsing
-}
+//     info->map_width = MAP_WIDTH;        // change after parsing
+//     info->map_height = MAP_HEIGHT;      // change after parsing
+// }
 
-int	check_map_name(t_info *info, char *map_name)
+int	check_file_name(char *file_name)
 {
 	int	i;
 	int	name_length;
 
 	i = 0;
-	name_length = ft_strlen(map_name);
+	name_length = ft_strlen(file_name);
 	if(name_length < 5)
 		return (-1);
-	if((map_name[name_length - 4] == '.' ) &&
-		(map_name[name_length - 3] == 'c' ) &&
-		(map_name[name_length - 2] == 'u' ) &&
-		(map_name[name_length - 1] == 'b'))
+	if((file_name[name_length - 4] == '.' ) &&
+		(file_name[name_length - 3] == 'c' ) &&
+		(file_name[name_length - 2] == 'u' ) &&
+		(file_name[name_length - 1] == 'b'))
 		return (1);
 	return (-1);
 }
 
-int	map_parsing(t_info *info, char **argv)
+static int	get_map_rows_and_length(t_info *info, char *file_name)
 {
-	if (check_map_name(info, argv[1]) == -1)
-		return(ft_error("Error: incorrect map extension\n"));
+	char *tmp_line;
+	int	fd;
+
+	info->row_count = 0;
+	info->line_max_length = -1;
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+		return (ft_error("Error\nCould not open map\n"));
+	tmp_line = get_next_line(fd);
+	if (!tmp_line)
+		return (-1);
+	while (tmp_line)
+	{
+		if (ft_strlen(tmp_line) > info->line_max_length)
+			info->line_max_length = ft_strlen(tmp_line);
+		info->row_count++;
+		free(tmp_line);
+		tmp_line = get_next_line(fd);
+	}
+	close(fd);
+	if (info->row_count = 0 || info->line_max_length < 1)
+		return (-1);
+	return (0);
+}
+
+static int	free_map_partial(char **map, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (map[i])
+			free(map[i]);
+		i++;
+	}
+	free(map);
+	return (-1);
+}
+
+int	create_local_file_copy(t_info *info, char *file_name)
+{
+	char 	*tmp_line;
+	int		i;
+	int		fd;
+
+	if (get_map_rows_and_length(info, file_name) == -1)
+		return (-1);
+	i = 0;	
+	info->file_copy = malloc(sizeof(char *) * (info->row_count + 1));
+	if (!(info->file_copy))
+		return (-1);
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+		return (ft_error("Error\nCould not open map\n"));
+	tmp_line = get_next_line(fd);
+	if (!tmp_line)
+		return (-1);
+	while (tmp_line && i < info->row_count)
+	{
+		(info->file_copy)[i] = tmp_line;
+		i++;
+		tmp_line = get_next_line(fd);
+	}
+	(info->file_copy)[i] = NULL;
+	close (fd);
+	if (i < info->row_count)
+		return (free_map_partial(info->file_copy, i));
+	return (0);
+}
+
+int	get_scene_elements(t_info *info, char *file_name)
+{
+	
+}
+
+int	file_parsing(t_info *info, char *file_name)
+{
+	if (check_file_name(file_name) == -1)
+		return(ft_error("Error\nIncorrect file extension\n"));
+	if (create_local_file_copy(info, file_name) == -1)
+		return(ft_error("Error\nCould not create local file copy\n"));
+	if (get_scene_elements(info, file_name) == -1)
+		return(ft_error("Error\nIncorrect scene elements\n")); // need to free items after this point
+}
+
+void	init_file_info(t_info *info)
+{
+	info->file_copy = NULL;
+	info->NO_path = NULL;
+	info->SO_path = NULL;
+	info->WE_path = NULL;
+	info->EA_path = NULL;
+	info->F_color = NULL;
 }
 
 int main(int argc, char **argv)
 {
-    t_info info;
+	t_info info;
 
-    (void)argc;
-    (void)argv;
+	(void)argc;
+	(void)argv;
 	if (argc != 2)
-		return(ft_error("Error: wrong argument count\n"));
-	if(map_parsing(&info, argv) == -1)
-    initialize_map(&info);
-    initialize_mlx(&info);
-    mlx_hook(info.win.mlx_win, 17, 0L, quit_program, &info);
-    mlx_loop(info.mlx);
+		return(ft_error("Error\nWrong argument count\n"));
+	init_file_info(&info);
+	if(file_parsing(&info, argv[1]) == -1)
+		return (1);
+	// initialize_map(&info);
+	initialize_mlx(&info);
+	mlx_hook(info.win.mlx_win, 17, 0L, quit_program, &info);
+	mlx_loop(info.mlx);
 }
