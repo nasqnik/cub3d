@@ -6,6 +6,7 @@
 
 # include "../mlx/mlx.h"
 # include <fcntl.h>
+# include <stdio.h>
 
 # define MAP_WIDTH 8 // example map width
 # define MAP_HEIGHT 8 // example map hight
@@ -49,6 +50,18 @@ typedef struct s_info
 	int			map_height;     // real map height
 }			t_info;
 
+
+//create_local_file_copy.c
+int	create_local_file_copy(t_info *info, char *file_name);
+
+//extract_color.c
+int	extract_color(t_info *info, char *line);
+
+// extract_scene_path.c
+int	extract_scene_path(t_info *info, char *line);
+
+// get_scene_elements.c
+int	get_scene_elements(t_info *info, char *file_name);
 
 // utils.c
 void error(char *message, t_info *info);
