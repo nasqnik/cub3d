@@ -45,8 +45,8 @@ int render_cub(t_info *info)
     while (x < WINDOW_WIDTH)
     {
         initialize_ray(&info->ray, &info->player, x);
-
-        // perform_dda(info);
+        dda(&info->ray, info);
+        dda_continue(&info->ray, x, info);
         x++;
     }
     return (0);

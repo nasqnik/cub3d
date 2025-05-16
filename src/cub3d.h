@@ -58,6 +58,7 @@ typedef struct s_ray
 	int				step_x;		    // what direction to step in x or y-direction (either +1 or -1)
 	int				step_y;
 	int				side;			// If an x-side was hit, side is set to 0, if an y-side was hit, side will be 1
+	int				line_height;
 	
 }				t_ray;
 
@@ -93,5 +94,9 @@ void initialize_example_map(t_info *info);
 
 // render.c
 int render_cub(t_info *info);
+
+// dda.c
+void dda(t_ray *ray, t_info *info);
+void dda_continue(t_ray *ray, int x, t_info *info);
 
 #endif
