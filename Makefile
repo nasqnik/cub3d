@@ -5,7 +5,7 @@ RM 			= rm -rf
 NAME 		= cub3D
 HEADER 		= src/cub3D.h
 
-SRC			= src/main.c src/utils.c
+SRC			= src/main.c src/utils.c src/initialize.c
 			
 OBJ			= $(SRC:%.c=%.o)
 

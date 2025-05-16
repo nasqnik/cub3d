@@ -1,12 +1,11 @@
 #include "cub3d.h"
 
-
 int quit_program(t_info *info)
 {
+    free_example_map(info);
     mlx_destroy_window(info->mlx, info->win.mlx_win);
-	// if (info->map != NULL)
-	// 	free_array(info->map);
-	exit(EXIT_SUCCESS);
+    exit(0);
+    return (0);
 }
 
 void error(char *message, t_info *info)
