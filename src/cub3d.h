@@ -61,7 +61,7 @@ int	extract_color(t_info *info, char *line);
 int	extract_scene_path(t_info *info, char *line);
 
 // get_scene_elements.c
-int	get_scene_elements(t_info *info, char *file_name);
+int	get_scene_elements(t_info *info);
 
 // utils.c
 void error(char *message, t_info *info);

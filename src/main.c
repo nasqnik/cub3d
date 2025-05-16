@@ -76,9 +76,16 @@ int	file_parsing(t_info *info, char *file_name)
 	if (check_file_name(file_name) == -1)
 		return(ft_error("Error\nIncorrect file extension\n"));
 	if (create_local_file_copy(info, file_name) == -1)
-		return(ft_error("Error\nCould not create local file copy\n"));
-	if (get_scene_elements(info, file_name) == -1)
-		return(ft_error("Error\nIncorrect scene elements\n")); // need to free items after this point
+		return(ft_error("Error\nCould not create local file copy\n")); // need to free items after this point
+	if (get_scene_elements(info) == -1)
+		return(ft_free_file("Error\nIncorrect scene elements\n", info));
+	if (check_for_lines_before_map(info) == -1)
+		return(ft_free_file("Error\nIncorrect input before map\n", info));
+	if (convert_to_map(info) == -1)
+		return(ft_free_file("Error\nIncorrect values in map\n", info));
+	if (is_valid_map(info) == -1)
+		return(ft_free_file("Error\nNot a valid map\n", info));
+	return (0);
 }
 
 void	init_file_info(t_info *info)

@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:39:37 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/16 20:40:01 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/16 21:07:40 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*is_color_identifier(const char *line)
 		|| ft_strnstr(line, "F", 1));
 }
 
-int	get_scene_elements(t_info *info, char *file_name)
+int	get_scene_elements(t_info *info)
 {
 	int	i;
 
