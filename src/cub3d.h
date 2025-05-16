@@ -6,6 +6,8 @@
 # include "../mlx/mlx.h"
 
 #include <stdlib.h> 
+#include <math.h>
+#include <stdio.h> // Delete before submission
 
 # define MAP_WIDTH 24 // example map width
 # define MAP_HEIGHT 24 // example map hight
@@ -15,38 +17,56 @@
 # define WINDOW_WIDTH 640 // example window width
 # define WINDOW_HEIGHT 480 // example window height
 
-typedef struct s_window
-{
-	int		x;
-	int		y;
-	void	*mlx_win;
-}				t_window;
 
-typedef struct s_point
+
+typedef struct s_point_double
 {
 	double		x;
 	double		y;
-}				t_point;
+}				t_point_double;
+
+typedef struct s_point_int
+{
+	int			x;
+	int			y;
+}				t_point_int;
+
+typedef struct s_vector
+{
+	double		x;
+	double		y;
+}				t_vector;
 
 typedef struct s_player
 {
-	t_point		pos;		// position of the player
-	t_point		dir;		// direction vector
-	t_point		camera_plane;		// camera plane
+	t_point_double	pos;				// position of the player
+	t_vector		dir;				// direction vector
+	t_vector		camera_plane;
 }				t_player;
 
 typedef struct s_ray
 {
-	t_point	    camera;
-	t_point		dir;		// direction vector
-
+	int				hit;			// did the ray hit a wall?
+	double	    	camera_x;
+	t_vector		dir;			// direction vector
+	t_point_int		map;			// which box of the map we're in
+	double			side_dist_x; 	// length of ray from current position to next x or y-side
+	double			side_dist_y;
+	double			delta_dist_x; 	// length of ray from one x or y-side to next x or y-side
+	double			delta_dist_y;
+	double			perp_wall_dist;
+	int				step_x;		    // what direction to step in x or y-direction (either +1 or -1)
+	int				step_y;
+	int				side;			// If an x-side was hit, side is set to 0, if an y-side was hit, side will be 1
+	
 }				t_ray;
+
 typedef struct s_info
 {
     int         **example_map; // random map for now
 
 	void		*mlx;
-	t_window	win;
+	void		*mlx_win;
 
 	char		*map_name;		// map name from argument av[1]
 	char		**map;          // real map
@@ -67,8 +87,11 @@ void error(char *message, t_info *info);
 int quit_program(t_info *info);
 void free_example_map(t_info *info);
 
-//initialize.c
+// initialize.c
 void initialize_cub3d(t_info *info);
 void initialize_example_map(t_info *info);
+
+// render.c
+int render_cub(t_info *info);
 
 #endif

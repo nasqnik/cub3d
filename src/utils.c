@@ -3,7 +3,7 @@
 int quit_program(t_info *info)
 {
     free_example_map(info);
-    mlx_destroy_window(info->mlx, info->win.mlx_win);
+    mlx_destroy_window(info->mlx, info->mlx_win);
     exit(0);
     return (0);
 }

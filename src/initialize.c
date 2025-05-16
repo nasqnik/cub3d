@@ -4,23 +4,23 @@ void initialize_player(t_info *info)
 {
     if (info->direction == 'N')
     {
-        info->player.dir = (t_point){0.0, -1.0};
-        info->player.camera_plane = (t_point){0.66, 0.0};
+        info->player.dir = (t_vector){0.0, -1.0};
+        info->player.camera_plane = (t_vector){0.66, 0.0};
     }
     else if (info->direction == 'S')
     {
-        info->player.dir = (t_point){0.0, 1.0};
-        info->player.camera_plane = (t_point){-0.66, 0.0};
+        info->player.dir = (t_vector){0.0, 1.0};
+        info->player.camera_plane = (t_vector){-0.66, 0.0};
     }
     else if (info->direction == 'E')
     {
-        info->player.dir = (t_point){1.0, 0.0};
-        info->player.camera_plane = (t_point){0.0, 0.66};
+        info->player.dir = (t_vector){1.0, 0.0};
+        info->player.camera_plane = (t_vector){0.0, 0.66};
     }
     else if (info->direction == 'W')
     {
-        info->player.dir = (t_point){-1.0, 0.0};
-        info->player.camera_plane = (t_point){0.0, -0.66};
+        info->player.dir = (t_vector){-1.0, 0.0};
+        info->player.camera_plane = (t_vector){0.0, -0.66};
     }
 }
 
@@ -29,9 +29,14 @@ void initialize_cub3d(t_info *info)
 {
     info->time = 0.0;
     info->old_time = 0.0;
-    info->player.pos = (t_point){22, 12};    // change after parsing
+    info->player.pos = (t_point_double){22.00, 12};    // change after parsing
     info->direction = 'W';                   // change after parsing
     initialize_player(info);
+
+    mlx_hook(info->mlx_win, 17, 0L, quit_program, info);
+    // mlx_hook(info->win.mlx_win, 2, 1L<<0, key_press, info);
+    // mlx_hook(info->win.mlx_win, 3, 1L<<1, key_release, info);  
+    mlx_loop_hook(info->mlx, render_cub, info);
 }
 
 
