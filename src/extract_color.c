@@ -6,11 +6,59 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:38:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/16 20:42:42 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/16 20:59:45 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	is_valid_rgb_component(const char *str)
+{
+	int	value;
+
+	while (*str == ' ' || *str == '\t')
+		str++;
+	if (!*str)
+		return (0);
+	if (*str < '0' || *str > '9')
+		return (0);
+	value = ft_atoi(str);
+	if (value < 0 || value > 255)
+		return (0);
+	while (*str && (*str >= '0' && *str <= '9'))
+		str++;
+	while (*str && (*str == ' ' || *str == '\t'))
+		str++;
+	if (*str)
+		return (0);
+	return (1);
+}
+
+static int	validate_and_convert_rgb(int **dest, char **rgb)
+{
+	int i;
+	
+	i = 0;
+	*dest = malloc(sizeof(int) * 3);
+	if (!*dest)
+	{
+		free_split(rgb);
+		return (-1);
+	}
+	while (i < 3)
+	{
+		if (!is_valid_rgb_component(rgb[i]))
+		{
+			free(*dest);
+			*dest = NULL;
+			free_split(rgb);
+			return(ft_error("Error\nInvalid RGB component\n"));
+		}
+		(*dest)[i] = ft_atoi(rgb[i]);
+		i++;
+	}
+	return (0);
+}
 
 static int	parse_color(int **dest, const char *line)
 {
@@ -32,25 +80,8 @@ static int	parse_color(int **dest, const char *line)
 		free_split(rgb);
 		return (ft_error("Error\nColor must have 3 components\n"));
 	}
-	*dest = malloc(sizeof(int) * 3);
-	if (!*dest)
-	{
-		free_split(rgb);
+	if (validate_and_convert_rgb(dest, rgb) == -1)
 		return (-1);
-	}
-	i = 0;
-	while (i < 3)
-	{
-		(*dest)[i] = ft_atoi(rgb[i]);
-		if ((*dest)[i] < 0 || (*dest)[i] > 255)
-		{
-			free(*dest);
-			*dest = NULL;
-			free_split(rgb);
-			return(ft_error("Error\nColor values must be between 0 & 255\n"));
-		}
-		i++;
-	}
 	free_split(rgb);
 	return (0);
 }
