@@ -144,9 +144,83 @@ int	create_local_file_copy(t_info *info, char *file_name)
 	return (0);
 }
 
+char	*is_scene_identifier(const char *line)
+{
+	return (ft_strnstr(line, "NO", 2)
+		|| ft_strnstr(line, "SO", 2)
+		|| ft_strnstr(line, "WE", 2)
+		|| ft_strnstr(line, "EA", 2));
+}
+
+char	*is_color_identifier(const char *line)
+{
+	return (ft_strnstr(line, "C", 1)
+		|| ft_strnstr(line, "F", 1));
+}
+int	parse_texture(char **dest, const char *line)
+{
+	int	fd;
+
+	fd = 0;
+	if (*dest != NULL)
+		return (-1);
+	while (*line && (*line == ' ' || *line == '\t'))
+		line++;
+	*dest = ft_strdup(line);
+	if(!*dest)
+		return (-1);
+	fd = open (*dest, O_RDONLY);
+	if (fd == -1)
+		return (ft_error("Error\nTexture file not found\n"));
+	close (fd);
+	return (0);
+}
+
+int	extract_scene_path(t_info *info, char *line)
+{
+	if (ft_strnstr(line, "NO", 2))
+		return (parse_texture(&info->NO_path, line + 2));
+	if (ft_strnstr(line, "SO", 2))
+		return (parse_texture(&info->SO_path, line + 2));
+	if (ft_strnstr(line, "WE", 2))
+		return (parse_texture(&info->WE_path, line + 2));
+	if (ft_strnstr(line, "EA", 2))
+		return (parse_texture(&info->EA_path, line + 2));
+	return (-1);
+}
+
+int	extract_color(t_info *info, char *line)
+{
+	if (ft_strnstr(line, "F", 1))
+		return parse_color(&(info->F_color), line + 1);
+	if (ft_strnstr(line, "C", 1))
+		return parse_color(&(info->C_color), line + 1);
+	return (-1);
+}
+
 int	get_scene_elements(t_info *info, char *file_name)
 {
-	
+	int	i;
+
+	i = 0;
+	while((info->file_copy)[i] && info->element_count < 6)
+	{
+		if (is_scene_identifier((info->file_copy)[i]))
+		{
+			if (extract_scene_path(info, (info->file_copy)[i]) == -1)
+				return (-1);
+			info->element_count++;
+		}
+		else if (is_color_identifier((info->file_copy)[i]))
+		{
+			if (extract_color(info, (info->file_copy)[i]) == -1)
+				return (-1);
+			info->element_count++;
+		}
+		else if (is_not_empty_line((info->file_copy)[i]))
+			return (-1);
+		i++;
+	}
 }
 
 int	file_parsing(t_info *info, char *file_name)
@@ -167,6 +241,8 @@ void	init_file_info(t_info *info)
 	info->WE_path = NULL;
 	info->EA_path = NULL;
 	info->F_color = NULL;
+	info->C_color = NULL;
+	info->element_count < 6;
 }
 
 int main(int argc, char **argv)

@@ -34,15 +34,17 @@ typedef struct s_info
 
 	void		*mlx;
 	t_window	win;
-	char		*map_name;		// map name from argument av[1]
+	char		*file_name;		// file name from argument av[1] - to decide if needed or not
 	int			row_count;
-	int			line_max_length;
-	char		**file_copy;          // local copy
-	char		*NO_path;
-	char		*SO_path;
-	char		*WE_path;
-	char		*EA_path;
-	int			*F_color;
+	int			line_max_length;   //not really used for now. Can be potentially deleted. to review.
+	char		**file_copy;          // local copy - malloc'd
+	char		*NO_path;		//malloc'd
+	char		*SO_path;		//malloc'd
+	char		*WE_path;		//malloc'd
+	char		*EA_path;		//malloc'd
+	int			*F_color;		//malloc'd
+	int			*C_color;		//malloc'd
+	int			element_count;
 	int			map_width;      // real map width
 	int			map_height;     // real map height
 }			t_info;
