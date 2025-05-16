@@ -34,6 +34,7 @@ typedef struct s_info
 	void		*mlx;
 	t_window	win;
 
+	char		*map_name;		// map name from argument av[1]
 	char		**map;          // real map
 	int			map_width;      // real map width
 	int			map_height;     // real map height
