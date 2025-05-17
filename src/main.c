@@ -103,7 +103,7 @@ void	init_file_info(t_info *info)
 	info->pos_map_start = 0;
 	info->map_width = 0;
 	info->map_height = 0;
-	info->player.x = 0;
+	info->player.x = -1;
 	info->player.y = 0;
 	info->player.dir = 0;
 }
