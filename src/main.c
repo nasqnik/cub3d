@@ -79,7 +79,7 @@ int	file_parsing(t_info *info, char *file_name)
 		return(ft_error("Error\nCould not create local file copy\n")); // need to free items after this point
 	if (get_scene_elements(info) == -1)
 		return(ft_free_file("Error\nIncorrect scene elements\n", info));
-	if (check_for_lines_before_map(info) == -1)
+	if (check_lines_before_map(info) == -1)
 		return(ft_free_file("Error\nIncorrect input before map\n", info));
 	if (convert_to_map(info) == -1)
 		return(ft_free_file("Error\nIncorrect values in map\n", info));
@@ -90,6 +90,7 @@ int	file_parsing(t_info *info, char *file_name)
 
 void	init_file_info(t_info *info)
 {
+	info->map = NULL;
 	info->file_copy = NULL;
 	info->NO_path = NULL;
 	info->SO_path = NULL;
@@ -97,7 +98,14 @@ void	init_file_info(t_info *info)
 	info->EA_path = NULL;
 	info->F_color = NULL;
 	info->C_color = NULL;
-	info->element_count < 6;
+	info->element_count = 0;
+	info->pos_last_element = 0;
+	info->pos_map_start = 0;
+	info->map_width = 0;
+	info->map_height = 0;
+	info->player.x = 0;
+	info->player.y = 0;
+	info->player.dir = 0;
 }
 
 int main(int argc, char **argv)

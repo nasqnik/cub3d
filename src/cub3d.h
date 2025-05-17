@@ -29,6 +29,13 @@ typedef struct s_window
 // 	int		y;
 // }				t_point;
 
+typedef struct s_player
+{
+	int	x;
+	int	y;
+	char dir;
+} t_player;
+
 typedef struct s_info
 {
     int         example_map; // random map for now
@@ -38,6 +45,10 @@ typedef struct s_info
 	char		*file_name;		// file name from argument av[1] - to decide if needed or not
 	int			row_count;
 	int			line_max_length;   //not really used for now. Can be potentially deleted. to review.
+	int			**map;
+	int			map_width;      // real map width
+	int			map_height;     // real map height
+	t_player	player;
 	char		**file_copy;          // local copy - malloc'd
 	char		*NO_path;		//malloc'd
 	char		*SO_path;		//malloc'd
@@ -46,10 +57,12 @@ typedef struct s_info
 	int			*F_color;		//malloc'd
 	int			*C_color;		//malloc'd
 	int			element_count;
-	int			map_width;      // real map width
-	int			map_height;     // real map height
+	int			pos_last_element;
+	int			pos_map_start;
 }			t_info;
 
+//check_lines_before_map.c
+int	check_lines_before_map(t_info *info);
 
 //create_local_file_copy.c
 int	create_local_file_copy(t_info *info, char *file_name);
@@ -61,6 +74,7 @@ int	extract_color(t_info *info, char *line);
 int	extract_scene_path(t_info *info, char *line);
 
 // get_scene_elements.c
+int	is_not_empty_line(const char *line);
 int	get_scene_elements(t_info *info);
 
 // utils.c

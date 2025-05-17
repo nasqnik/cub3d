@@ -6,13 +6,13 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:41:06 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/16 20:41:19 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:58:06 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	get_map_rows_and_length(t_info *info, char *file_name)
+static int	get_file_rows_and_length(t_info *info, char *file_name)
 {
 	char *tmp_line;
 	int	fd;
@@ -39,18 +39,18 @@ static int	get_map_rows_and_length(t_info *info, char *file_name)
 	return (0);
 }
 
-static int	free_map_partial(char **map, int count)
+static int	free_file_partial(char **file, int count)
 {
 	int	i;
 
 	i = 0;
 	while (i < count)
 	{
-		if (map[i])
-			free(map[i]);
+		if (file[i])
+			free(file[i]);
 		i++;
 	}
-	free(map);
+	free(file);
 	return (-1);
 }
 
@@ -60,7 +60,7 @@ int	create_local_file_copy(t_info *info, char *file_name)
 	int		i;
 	int		fd;
 
-	if (get_map_rows_and_length(info, file_name) == -1)
+	if (get_file_rows_and_length(info, file_name) == -1)
 		return (-1);
 	i = 0;	
 	info->file_copy = malloc(sizeof(char *) * (info->row_count + 1));
@@ -81,6 +81,6 @@ int	create_local_file_copy(t_info *info, char *file_name)
 	(info->file_copy)[i] = NULL;
 	close (fd);
 	if (i < info->row_count)
-		return (free_map_partial(info->file_copy, i));
+		return (free_file_partial(info->file_copy, i));
 	return (0);
 }
