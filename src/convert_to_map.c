@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:51:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 20:40:18 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/17 20:40:58 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,9 @@ int	convert_to_map(t_info *info)
 {
 	int	i;
 	int	j;
-	int	player_found;
 	
 	i = 0;
 	j = 0;
-	player_found = 0;
 	info->map_width = find_max_line_length(info->file_copy + info->pos_map_start);
 	info->map_height = info->row_count - info->pos_map_start + 1;
 	if (info->map_height < 1)
