@@ -1,13 +1,24 @@
-CC			= cc
-CFLAGS		= -Wall -Werror -Wextra
-RM 			= rm -rf
+CC			= 	cc
+CFLAGS		= 	-Wall -Werror -Wextra
+RM 			= 	rm -rf
 
-NAME 		= cub3D
-HEADER 		= src/cub3D.h
+NAME 		= 	cub3D
+HEADER 		= 	src/cub3D.h
 
-SRC			= src/main.c src/utils.c
+SRCS_FILES	= 	check_lines_before_map.c \
+				convert_to_map.c \
+				create_local_file_copy.c \
+				extract_color.c \
+				extract_scene_path.c \
+				get_scene_elements.c \
+				is_valid_map.c \
+				main.c \
+				utils.c		
+
+SRCS_DIR	= 	./src/
+SRC			= 	$(addprefix $(SRCS_DIR), $(SRCS_FILES))
 			
-OBJ			= $(SRC:%.c=%.o)
+OBJ			= 	$(SRC:%.c=%.o)
 
 LIBFT		=	lib/libft/libft.a
 FT_PRINTF	=	lib/ft_printf/libftprintf.a

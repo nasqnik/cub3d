@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:51:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 20:53:51 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:40:07 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	find_max_line_length(char **file)
 	max_length = 0;
 	while (file[i])
 	{
-		if (ft_strlen(file[i]) > max_length)
+		if ((int)ft_strlen(file[i]) > max_length)
 			max_length = ft_strlen(file[i]);
 		i++;
 	}
@@ -61,7 +61,7 @@ static int	process_map(t_info *info, int i, int j)
 	
 	while(j < info->map_width)
 	{
-		if (j > ft_strlen(info->file_copy[i + info->pos_map_start]))
+		if (j > (int)ft_strlen(info->file_copy[i + info->pos_map_start]))
 			c = ' ';
 		else
 			c = (info->file_copy)[i + info->pos_map_start][j];

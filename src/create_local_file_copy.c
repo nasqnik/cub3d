@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:41:06 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 20:56:18 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:40:20 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	get_file_rows(t_info *info, char *file_name)
 		tmp_line = get_next_line(fd);
 	}
 	close(fd);
-	if (info->row_count = 0)
+	if (info->row_count == 0)
 		return (-1);
 	return (0);
 }

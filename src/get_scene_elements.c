@@ -6,24 +6,25 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:39:37 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 18:38:56 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:45:04 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char	*is_scene_identifier(const char *line)
+static int	is_scene_identifier(const char *line)
 {
-	return (ft_strnstr(line, "NO", 2)
-		|| ft_strnstr(line, "SO", 2)
-		|| ft_strnstr(line, "WE", 2)
-		|| ft_strnstr(line, "EA", 2));
+	return (
+		ft_strnstr(line, "NO", 2) != NULL
+		|| ft_strnstr(line, "SO", 2) != NULL
+		|| ft_strnstr(line, "WE", 2) != NULL
+		|| ft_strnstr(line, "EA", 2) != NULL);
 }
 
-static char	*is_color_identifier(const char *line)
+static int	is_color_identifier(const char *line)
 {
-	return (ft_strnstr(line, "C", 1)
-		|| ft_strnstr(line, "F", 1));
+	return (ft_strnstr(line, "C", 1) != NULL
+		|| ft_strnstr(line, "F", 1) != NULL);
 }
 
 int	is_not_empty_line(const char *line)
