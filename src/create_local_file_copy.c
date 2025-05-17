@@ -6,19 +6,18 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:41:06 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 18:58:06 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/17 20:56:18 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	get_file_rows_and_length(t_info *info, char *file_name)
+static int	get_file_rows(t_info *info, char *file_name)
 {
 	char *tmp_line;
 	int	fd;
 
 	info->row_count = 0;
-	info->line_max_length = -1;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 		return (ft_error("Error\nCould not open map\n"));
@@ -27,14 +26,12 @@ static int	get_file_rows_and_length(t_info *info, char *file_name)
 		return (-1);
 	while (tmp_line)
 	{
-		if (ft_strlen(tmp_line) > info->line_max_length)
-			info->line_max_length = ft_strlen(tmp_line);
 		info->row_count++;
 		free(tmp_line);
 		tmp_line = get_next_line(fd);
 	}
 	close(fd);
-	if (info->row_count = 0 || info->line_max_length < 1)
+	if (info->row_count = 0)
 		return (-1);
 	return (0);
 }
@@ -60,7 +57,7 @@ int	create_local_file_copy(t_info *info, char *file_name)
 	int		i;
 	int		fd;
 
-	if (get_file_rows_and_length(info, file_name) == -1)
+	if (get_file_rows(info, file_name) == -1)
 		return (-1);
 	i = 0;	
 	info->file_copy = malloc(sizeof(char *) * (info->row_count + 1));

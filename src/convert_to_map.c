@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:51:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 20:40:58 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/17 20:53:51 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	process_map(t_info *info, int i, int j)
 				return (-1);
 		}
 		else
-			return(free_partial_map(info, i, "Error\nInvalid map char\n"));
+			return(free_partial_map(info, i + 1, "Error\nInvalid map char\n"));
 		j++;
 	}
 	return (0);
@@ -106,6 +106,6 @@ int	convert_to_map(t_info *info)
 			return (-1);
 	}
 	if (info->player.x == -1)
-		return (free_partial_map(info, i, "Error\nNo player found\n"));
+		return (free_partial_map(info, i + 1, "Error\nNo player found\n"));
 	return (0);
 }

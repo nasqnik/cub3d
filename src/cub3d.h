@@ -77,6 +77,9 @@ int	extract_scene_path(t_info *info, char *line);
 int	is_not_empty_line(const char *line);
 int	get_scene_elements(t_info *info);
 
+// is_valid_map.c
+int	is_valid_map(t_info *info);
+
 // utils.c
 void error(char *message, t_info *info);
 int quit_program(t_info *info);
