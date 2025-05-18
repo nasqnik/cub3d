@@ -18,6 +18,7 @@
 # define WINDOW_WIDTH 640 // example window width
 # define WINDOW_HEIGHT 480 // example window height
 # define COL_BUFFER 0.15 		// collision buffer before the wall
+# define SPEED_ROT 0.7
 
 # define ESC_KEY 53
 # define W_KEY 13
@@ -32,7 +33,9 @@ typedef enum s_direction
 	FORWARD,
 	BACKWARD,
 	LEFT,
-	RIGHT
+	RIGHT,
+	ROTATE_LEFT,
+	ROTATE_RIGHT
 }			t_direction;
 
 typedef struct s_point_double

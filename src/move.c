@@ -1,6 +1,35 @@
 #include "cub3d.h"
 
-void calculate_movement(t_info *info, t_move *move, t_direction direction)
+static void rotate_player(t_info *info, t_player *player, t_direction direction)
+{
+    double	rotation;
+	double	old_dir_x;
+	double	old_plane_x;
+	double	cos_rot;
+	double	sin_rot;
+
+	if (direction == ROTATE_RIGHT)
+		rotation = SPEED_ROT * info->delta_time;
+	else
+		rotation = -SPEED_ROT * info->delta_time;
+	if (fabs(rotation) > 0.1)
+	{
+		if (rotation > 0)
+			rotation = 0.1;
+		else
+			rotation = -0.1;
+	}
+	cos_rot = cos(rotation);
+	sin_rot = sin(rotation);
+	old_dir_x = player->dir.x;
+	player->dir.x = player->dir.x * cos_rot - player->dir.y * sin_rot;
+	player->dir.y = old_dir_x * sin_rot + player->dir.y * cos_rot;
+	old_plane_x = player->camera_plane.x;
+	player->camera_plane.x = player->camera_plane.x * cos_rot - player->camera_plane.y * sin_rot;
+	player->camera_plane.y = old_plane_x * sin_rot + player->camera_plane.y * cos_rot;
+}
+
+static void calculate_movement(t_info *info, t_move *move, t_direction direction)
 {
     if (direction == FORWARD)
     {
@@ -23,7 +52,7 @@ void calculate_movement(t_info *info, t_move *move, t_direction direction)
 		move->step.y = info->player.camera_plane.y * (info->move_speed * info->delta_time);
     }
 }
-void update_position(t_info *info)
+static void update_position(t_info *info)
 {
     static t_point_double   prev = (t_point_double){-1, -1};
     t_point_double          delta;
@@ -49,8 +78,7 @@ void update_position(t_info *info)
     }
 }
 
-
-void apply_movement(t_info *info, t_move *move)
+static void apply_movement(t_info *info, t_move *move)
 {
     double new_x;
     double new_y;
@@ -82,9 +110,15 @@ void handle_movement(t_info *info)
         direction = LEFT;
     else if (info->keys.d)
         direction = RIGHT;
-    if (direction != -1)
+    else if (info->keys.right)
+        direction = ROTATE_RIGHT;
+    else if (info->keys.left)
+        direction = ROTATE_LEFT;
+    if (direction != -1 && direction != ROTATE_LEFT && direction != ROTATE_RIGHT)
     {
         calculate_movement(info, &move, direction);
         apply_movement(info, &move);
     }
+    else if (direction == ROTATE_LEFT || direction == ROTATE_RIGHT)
+        rotate_player(info, &info->player, direction);
 }
