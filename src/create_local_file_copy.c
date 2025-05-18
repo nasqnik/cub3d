@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:41:06 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 19:08:26 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 19:58:11 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static int	get_file_rows(t_info *info, char *file_name)
 	if (fd == -1)
 		return (ft_error("Error\nCould not open file\n"));
 	tmp_line = get_next_line(fd);
-	if (!tmp_line)
-		return (-1);
 	while (tmp_line)
 	{
 		info->row_count++;
