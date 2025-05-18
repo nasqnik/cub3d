@@ -1,5 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/18 21:54:07 by saherrer          #+#    #+#             */
+/*   Updated: 2025/05/18 22:05:56 by saherrer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "cub3d.h"
 
 // int quit_program(t_info *info)
 // {
@@ -15,7 +26,7 @@ int	ft_error(const char *message)
 	return (-1);
 }
 
-void free_file(t_info *info)
+void	free_file(t_info *info)
 {
 	int	i;
 
@@ -30,7 +41,7 @@ void free_file(t_info *info)
 	info->file_copy = NULL;
 }
 
-void free_map(t_info *info)
+void	free_map(t_info *info)
 {
 	int	i;
 
@@ -51,18 +62,18 @@ int	ft_free_file(const char *message, t_info *info)
 		free_file(info);
 	if (info->map)
 		free_map(info);
-	if (info->NO_path)
-		free(info->NO_path);
-	if (info->SO_path)
-		free(info->SO_path);
-	if (info->WE_path)
-		free(info->WE_path);
-	if (info->EA_path)
-		free(info->EA_path);
-	if (info->F_color)
-		free(info->F_color);	
-	if (info->C_color)
-		free(info->C_color);
+	if (info->no_path)
+		free(info->no_path);
+	if (info->so_path)
+		free(info->so_path);
+	if (info->we_path)
+		free(info->we_path);
+	if (info->ea_path)
+		free(info->ea_path);
+	if (info->f_color)
+		free(info->f_color);
+	if (info->c_color)
+		free(info->c_color);
 	return (ft_error(message));
 }
 
@@ -82,12 +93,11 @@ void	free_split(char **array)
 	free(array);
 }
 
-void error(char *message, t_info *info)
-{
-    (void)info;
-    // if (info->map != NULL)
-    //     free_array(info->map);
-    ft_putstr_fd("Error\n", 2);
-    ft_putstr_fd(message, 2); 
-    exit(EXIT_FAILURE);
-}
+// void	error(char *message, t_info *info)
+// {
+// 	(void)info;
+
+// 	ft_putstr_fd("Error\n", 2);
+// 	ft_putstr_fd(message, 2); 
+// 	exit(EXIT_FAILURE);
+// }

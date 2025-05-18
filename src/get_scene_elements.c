@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:39:37 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 21:45:04 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:00:27 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	is_not_empty_line(const char *line)
 	int	i;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (line[i] == ' ' || line[i] == '\t' || line[i] == '\n')
 			i++;
 		else
-			return(1);
+			return (1);
 	}
 	return (0);
 }
@@ -47,7 +47,7 @@ int	get_scene_elements(t_info *info)
 	int	i;
 
 	i = 0;
-	while((info->file_copy)[i] && info->element_count < 6)
+	while ((info->file_copy)[i] && info->element_count < 6)
 	{
 		if (is_scene_identifier((info->file_copy)[i]))
 		{

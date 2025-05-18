@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:41:06 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 19:58:11 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:09:53 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	get_file_rows(t_info *info, char *file_name)
 {
-	char *tmp_line;
-	int	fd;
+	char	*tmp_line;
+	int		fd;
 
 	info->row_count = 0;
 	fd = open(file_name, O_RDONLY);
@@ -51,13 +51,13 @@ static int	free_file_partial(char **file, int count)
 
 int	create_local_file_copy(t_info *info, char *file_name)
 {
-	char 	*tmp_line;
+	char	*tmp_line;
 	int		i;
 	int		fd;
 
 	if (get_file_rows(info, file_name) == -1)
 		return (-1);
-	i = 0;	
+	i = 0;
 	info->file_copy = malloc(sizeof(char *) * (info->row_count + 1));
 	if (!(info->file_copy))
 		return (-1);
@@ -65,12 +65,9 @@ int	create_local_file_copy(t_info *info, char *file_name)
 	if (fd == -1)
 		return (ft_error("Error\nCould not open map\n"));
 	tmp_line = get_next_line(fd);
-	if (!tmp_line)
-		return (-1);
 	while (tmp_line && i < info->row_count)
 	{
-		(info->file_copy)[i] = tmp_line;
-		i++;
+		(info->file_copy)[i++] = tmp_line;
 		tmp_line = get_next_line(fd);
 	}
 	(info->file_copy)[i] = NULL;

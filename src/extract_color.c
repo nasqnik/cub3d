@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:38:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 20:28:23 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:05:56 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	count_commas(const char *str)
 {
 	int	count;
-	
+
 	count = 0;
 	while (*str)
 	{
@@ -50,8 +50,8 @@ static int	is_valid_rgb_component(const char *str)
 
 static int	validate_and_convert_rgb(int **dest, char **rgb)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	*dest = malloc(sizeof(int) * 3);
 	if (!*dest)
@@ -66,7 +66,7 @@ static int	validate_and_convert_rgb(int **dest, char **rgb)
 			free(*dest);
 			*dest = NULL;
 			free_split(rgb);
-			return(ft_error("Error\nInvalid RGB component\n"));
+			return (ft_error("Error\nInvalid RGB component\n"));
 		}
 		(*dest)[i] = ft_atoi(rgb[i]);
 		i++;
@@ -99,8 +99,8 @@ static int	parse_color(int **dest, const char *line)
 int	extract_color(t_info *info, char *line)
 {
 	if (ft_strnstr(line, "F", 1))
-		return (parse_color(&(info->F_color), line + 1));
+		return (parse_color(&(info->f_color), line + 1));
 	if (ft_strnstr(line, "C", 1))
-		return (parse_color(&(info->C_color), line + 1));
+		return (parse_color(&(info->c_color), line + 1));
 	return (-1);
 }

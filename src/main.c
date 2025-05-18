@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:34:53 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 20:44:51 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:05:56 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ int	check_file_name(char *file_name)
 	int	name_length;
 
 	name_length = ft_strlen(file_name);
-	if(name_length < 5)
+	if (name_length < 5)
 		return (-1);
-	if((file_name[name_length - 4] == '.' ) &&
-		(file_name[name_length - 3] == 'c' ) &&
-		(file_name[name_length - 2] == 'u' ) &&
-		(file_name[name_length - 1] == 'b'))
+	if ((file_name[name_length - 4] == '.' )
+		&& (file_name[name_length - 3] == 'c' )
+		&& (file_name[name_length - 2] == 'u' )
+		&& (file_name[name_length - 1] == 'b'))
 		return (1);
 	return (-1);
 }
@@ -83,17 +83,17 @@ int	check_file_name(char *file_name)
 int	file_parsing(t_info *info, char *file_name)
 {
 	if (check_file_name(file_name) == -1)
-		return(ft_error("Error\nIncorrect file extension\n"));
+		return (ft_error("Error\nIncorrect file extension\n"));
 	if (create_local_file_copy(info, file_name) == -1)
-		return(ft_error("Error\nCould not create local file copy\n"));
+		return (ft_error("Error\nCould not create local file copy\n"));
 	if (get_scene_elements(info) == -1)
-		return(ft_free_file("Error\nIncorrect scene elements\n", info));
+		return (ft_free_file("Error\nIncorrect scene elements\n", info));
 	if (check_lines_before_map(info) == -1)
-		return(ft_free_file("Error\nIncorrect input before map\n", info));
+		return (ft_free_file("Error\nIncorrect input before map\n", info));
 	if (convert_to_map(info) == -1)
-		return(ft_free_file("Error\nIncorrect values in map\n", info));
+		return (ft_free_file("Error\nIncorrect values in map\n", info));
 	if (is_valid_map(info) == -1)
-		return(ft_free_file("Error\nNot a valid map\n", info));
+		return (ft_free_file("Error\nNot a valid map\n", info));
 	return (0);
 }
 
@@ -101,12 +101,12 @@ void	init_file_info(t_info *info)
 {
 	info->map = NULL;
 	info->file_copy = NULL;
-	info->NO_path = NULL;
-	info->SO_path = NULL;
-	info->WE_path = NULL;
-	info->EA_path = NULL;
-	info->F_color = NULL;
-	info->C_color = NULL;
+	info->no_path = NULL;
+	info->so_path = NULL;
+	info->we_path = NULL;
+	info->ea_path = NULL;
+	info->f_color = NULL;
+	info->c_color = NULL;
 	info->element_count = 0;
 	info->pos_last_element = 0;
 	info->pos_map_start = 0;
@@ -117,18 +117,18 @@ void	init_file_info(t_info *info)
 	info->player.dir = 0;
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_info info;
+	t_info	info;
 
 	(void)argc;
 	(void)argv;
 	if (argc != 2)
-		return(ft_error("Error\nWrong argument count\n"));
+		return (ft_error("Error\nWrong argument count\n"));
 	init_file_info(&info);
-	if(file_parsing(&info, argv[1]) == -1)
+	if (file_parsing(&info, argv[1]) == -1)
 		return (1);
-	ft_free_file("thanks for playing\n",&info);
+	ft_free_file("thanks for playing\n", &info);
 	// initialize_map(&info);
 	// initialize_mlx(&info);
 	// mlx_hook(info.win.mlx_win, 17, 0L, quit_program, &info);

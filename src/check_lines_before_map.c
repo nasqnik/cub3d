@@ -6,13 +6,13 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:38:40 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 19:19:13 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:32:36 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	is_valid_map_start(const char* line)
+static int	is_valid_map_start(const char *line)
 {
 	int	i;
 
@@ -38,11 +38,11 @@ int	check_lines_before_map(t_info *info)
 		return (-1);
 	while (info->file_copy[i])
 	{
-		if(!is_not_empty_line(info->file_copy[i]))
+		if (!is_not_empty_line(info->file_copy[i]))
 			i++;
 		else
 		{
-			if(is_valid_map_start(info->file_copy[i]))
+			if (is_valid_map_start(info->file_copy[i]))
 				break ;
 			else
 				return (ft_error("Error\nFound Incorrect Map Start\n"));

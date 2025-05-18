@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:49:07 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 19:46:07 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:59:01 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	free_partial_visited(int **visited, int count)
 	{
 		if (visited[i])
 			free(visited[i]);
-		visited[i]= NULL;
+		visited[i] = NULL;
 		i++;
 	}
 	free(visited);
@@ -58,7 +58,7 @@ int	is_valid_map(t_info *info)
 	while (y < info->map_height)
 	{
 		visited[y] = ft_calloc(info->map_width, sizeof(int));
-		if(!visited[y])
+		if (!visited[y])
 			return (free_partial_visited(visited, y));
 		y++;
 	}
