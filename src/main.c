@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:34:53 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 20:17:31 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:44:51 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@
 //     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 // };
 
-void initialize_mlx(t_info *info)
-{
-	info->mlx = mlx_init();
+// void initialize_mlx(t_info *info)
+// {
+// 	info->mlx = mlx_init();
 
-	info->win.x = WINDOW_WIDTH;	 // example window width, change after parsing
-	info->win.y = WINDOW_HEIGHT;	// example window height, change after parsing
+// 	info->win.x = WINDOW_WIDTH;	 // example window width, change after parsing
+// 	info->win.y = WINDOW_HEIGHT;	// example window height, change after parsing
 
-	if (!info->mlx)
-		error("mlx_init failed in initialize_mlx", info);
-	info->win.mlx_win = mlx_new_window(info->mlx,
-			info->win.x, info->win.y, "cub3D");
-	if (!info->win.mlx_win)
-		error("mlx_new_window failed in initialize_mlx", info);
-}
+// 	if (!info->mlx)
+// 		error("mlx_init failed in initialize_mlx", info);
+// 	info->win.mlx_win = mlx_new_window(info->mlx,
+// 			info->win.x, info->win.y, "cub3D");
+// 	if (!info->win.mlx_win)
+// 		error("mlx_new_window failed in initialize_mlx", info);
+// }
 
 // void initialize_map(t_info *info)
 // {
@@ -67,10 +67,8 @@ void initialize_mlx(t_info *info)
 
 int	check_file_name(char *file_name)
 {
-	int	i;
 	int	name_length;
 
-	i = 0;
 	name_length = ft_strlen(file_name);
 	if(name_length < 5)
 		return (-1);
@@ -130,6 +128,7 @@ int main(int argc, char **argv)
 	init_file_info(&info);
 	if(file_parsing(&info, argv[1]) == -1)
 		return (1);
+	ft_free_file("thanks for playing\n",&info);
 	// initialize_map(&info);
 	// initialize_mlx(&info);
 	// mlx_hook(info.win.mlx_win, 17, 0L, quit_program, &info);

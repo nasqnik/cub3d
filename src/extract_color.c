@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:38:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 20:12:02 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:28:23 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ static int	validate_and_convert_rgb(int **dest, char **rgb)
 static int	parse_color(int **dest, const char *line)
 {
 	char	**rgb;
-	int		i;
 	char	*trimmed_line;
 
-	i = 0;
 	if (*dest != NULL)
 		return (-1);
 	if (count_commas(line) != 2)

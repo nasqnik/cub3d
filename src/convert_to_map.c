@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:51:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 20:17:16 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:48:18 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	free_partial_map(t_info *info, int count, const char *message)
 static int	define_player_pos(t_info *info, int j, int i, char c)
 {
 	if (info->player.x != -1)
-		return(free_partial_map(info, i, "Error\nMax 1 player\n"));
+		return(free_partial_map(info, i + 1, "Error\nMax 1 player\n"));
 	info->player.x = j;
 	info->player.y = i;
 	info->player.dir = c;
