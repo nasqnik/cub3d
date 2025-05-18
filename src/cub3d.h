@@ -38,13 +38,13 @@ typedef struct s_player
 
 typedef struct s_info
 {
-    int         example_map; // random map for now
+    // int         example_map; // random map for now
 
 	void		*mlx;
 	t_window	win;
-	char		*file_name;		// file name from argument av[1] - to decide if needed or not
+	// char		*file_name;		// file name from argument av[1] - to decide if needed or not
 	int			row_count;
-	int			line_max_length;   //not really used for now. Can be potentially deleted. to review.
+	// int			line_max_length;   //not really used for now. Can be potentially deleted. to review.
 	int			**map;			//malloc'd
 	int			map_width;      // real map width
 	int			map_height;     // real map height

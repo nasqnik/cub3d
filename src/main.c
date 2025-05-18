@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:34:53 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 21:34:55 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 19:36:32 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	file_parsing(t_info *info, char *file_name)
 	if (check_file_name(file_name) == -1)
 		return(ft_error("Error\nIncorrect file extension\n"));
 	if (create_local_file_copy(info, file_name) == -1)
-		return(ft_error("Error\nCould not create local file copy\n")); // need to free items after this point
+		return(ft_error("Error\nCould not create local file copy\n"));
 	if (get_scene_elements(info) == -1)
 		return(ft_free_file("Error\nIncorrect scene elements\n", info));
 	if (check_lines_before_map(info) == -1)
@@ -131,7 +131,8 @@ int main(int argc, char **argv)
 	if(file_parsing(&info, argv[1]) == -1)
 		return (1);
 	// initialize_map(&info);
-	initialize_mlx(&info);
-	mlx_hook(info.win.mlx_win, 17, 0L, quit_program, &info);
-	mlx_loop(info.mlx);
+	// initialize_mlx(&info);
+	// mlx_hook(info.win.mlx_win, 17, 0L, quit_program, &info);
+	// mlx_loop(info.mlx);
+	printf("success\n");
 }

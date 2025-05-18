@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:37:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 21:51:14 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 19:41:37 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 static int	parse_texture(char **dest, const char *line)
 {
 	int	fd;
+	int	i;
+	char *trimmed_line;
 
 	fd = 0;
+	i = 0;
 	if (*dest != NULL)
 		return (-1);
-	while (*line && (*line == ' ' || *line == '\t'))
-		line++;
-	*dest = ft_strdup(line);
+	trimmed_line = ft_strtrim(line, " \t\n");
+	if (!trimmed_line)
+		return (-1);
+	*dest = ft_strdup(trimmed_line);
+	free(trimmed_line);
 	if(!*dest)
 		return (-1);
 	fd = open (*dest, O_RDONLY);

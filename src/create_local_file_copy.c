@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:41:06 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 21:40:20 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 19:08:26 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	get_file_rows(t_info *info, char *file_name)
 	info->row_count = 0;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		return (ft_error("Error\nCould not open map\n"));
+		return (ft_error("Error\nCould not open file\n"));
 	tmp_line = get_next_line(fd);
 	if (!tmp_line)
 		return (-1);

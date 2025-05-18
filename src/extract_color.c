@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:38:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/16 20:59:45 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 19:14:33 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,16 @@ static int	parse_color(int **dest, const char *line)
 {
 	char	**rgb;
 	int		i;
+	char	*trimmed_line;
 
 	i = 0;
 	if (*dest != NULL)
 		return (-1);
-	while (*line && (*line == ' ' || *line == '\t'))
-		line++;
-	rgb = ft_split(line, ',');
+	trimmed_line = ft_strtrim(line, " \n\t");
+	if (!trimmed_line)
+		return (-1);
+	rgb = ft_split(trimmed_line, ',');
+	free(trimmed_line);
 	if (!rgb)
 		return (-1);
 	while (rgb[i])

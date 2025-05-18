@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:38:40 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 19:18:53 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 19:19:13 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_valid_map_start(const char* line)
 	{
 		if (line[i] == ' ')
 			i++;
-		else if (line[i] == '1')
+		else if (line[i] == '1' || line[i] == '0')
 			return (1);
 		else
 			return (0);

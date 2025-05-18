@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:51:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 21:40:07 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 19:28:13 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	convert_to_map(t_info *info)
 	i = 0;
 	j = 0;
 	info->map_width = find_max_line_length(info->file_copy + info->pos_map_start);
-	info->map_height = info->row_count - info->pos_map_start + 1;
+	info->map_height = info->row_count - info->pos_map_start;
 	if (info->map_height < 1)
 		return (-1);
 	info->map = malloc(sizeof(int *) * (info->map_height));
@@ -104,6 +104,7 @@ int	convert_to_map(t_info *info)
 			return(free_partial_map(info, i, "Error\nMalloc failed\n"));
 		if (process_map(info, i, j) == -1)
 			return (-1);
+		i++;
 	}
 	if (info->player.x == -1)
 		return (free_partial_map(info, i + 1, "Error\nNo player found\n"));

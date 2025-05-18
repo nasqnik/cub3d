@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:49:07 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/17 21:01:06 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 19:46:07 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	free_partial_visited(int **visited, int count)
 	{
 		if (visited[i])
 			free(visited[i]);
+		visited[i]= NULL;
 		i++;
 	}
 	free(visited);
@@ -62,7 +63,10 @@ int	is_valid_map(t_info *info)
 		y++;
 	}
 	if (flood_fill(info, visited, info->player.x, info->player.y) == -1)
-		return (free_partial_visited(visited, y + 1));
-	free_partial_visited(visited, y + 1);
+	{
+		ft_error("Error\nMap is not closed\n");
+		return (free_partial_visited(visited, y));
+	}
+	free_partial_visited(visited, y);
 	return (0);
 }
