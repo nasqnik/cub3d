@@ -7,6 +7,7 @@
 
 #include <stdlib.h> 
 #include <math.h>
+#include <sys/time.h>
 #include <stdio.h> // Delete before submission
 
 # define MAP_WIDTH 24 // example map width
@@ -16,8 +17,23 @@
 
 # define WINDOW_WIDTH 640 // example window width
 # define WINDOW_HEIGHT 480 // example window height
+# define COL_BUFFER 0.15 		// collision buffer before the wall
 
+# define ESC_KEY 53
+# define W_KEY 13
+# define A_KEY 0
+# define S_KEY 1
+# define D_KEY 2
+# define RIGHT_ARROW 124
+# define LEFT_ARROW 123
 
+typedef enum s_direction
+{
+	FORWARD,
+	BACKWARD,
+	LEFT,
+	RIGHT
+}			t_direction;
 
 typedef struct s_point_double
 {
@@ -44,6 +60,15 @@ typedef struct s_player
 	t_vector		camera_plane;
 }				t_player;
 
+typedef struct s_move
+{
+    t_vector step;
+	t_point_int new;
+	t_point_int current;
+	int map_cur_y_len;
+	int map_new_y_len;
+}				t_move;
+
 typedef struct s_ray
 {
 	int				hit;			// did the ray hit a wall?
@@ -62,6 +87,25 @@ typedef struct s_ray
 	
 }				t_ray;
 
+typedef struct s_draw
+{
+	int			start;
+	int			end;
+	int			color;
+
+}				t_draw;
+
+typedef struct s_keys
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			right;
+	int			left;
+}				t_keys;
+
+
 typedef struct s_info
 {
     int         **example_map; // random map for now
@@ -77,9 +121,15 @@ typedef struct s_info
 	
 	t_player	player;
 	t_ray		ray;
+	t_draw		draw;
+	t_keys		keys;
 
 	double		time;
 	double		old_time;
+	double		delta_time;
+
+	double		move_speed;
+	double		rot_speed;
 }			t_info;
 
 
@@ -87,16 +137,27 @@ typedef struct s_info
 void error(char *message, t_info *info);
 int quit_program(t_info *info);
 void free_example_map(t_info *info);
+double current_time(void);
 
 // initialize.c
 void initialize_cub3d(t_info *info);
 void initialize_example_map(t_info *info);
 
 // render.c
-int render_cub(t_info *info);
+int render_cub3d(t_info *info);
 
 // dda.c
 void dda(t_ray *ray, t_info *info);
-void dda_continue(t_ray *ray, int x, t_info *info);
+void dda_continue(t_ray *ray, t_info *info);
+
+// move.c
+void handle_movement(t_info *info);
+
+// move_checks.c
+int check_map_position(t_info *info, t_move *move);
+
+// key.c
+int key_press(int keycode, t_info *info);
+int key_release(int keycode, t_info *info);
 
 #endif

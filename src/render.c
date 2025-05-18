@@ -36,18 +36,38 @@ static void initialize_ray(t_ray *ray, t_player *player, int x)
     initialize_step_side(ray, player);
 }
 
-int render_cub(t_info *info)
+void update_time_speed(t_info *info)
 {
-    (void)info;
+    info->old_time = info->time;
+    info->time = current_time();
+    info->delta_time = (info->time - info->old_time) / 1000.0;
+    info->move_speed = info->delta_time * 30.0;
+    info->rot_speed = info->delta_time * 3.0;
+}
+int render_cub3d(t_info *info)
+{
     int x;
+
+    update_time_speed(info);
+    handle_movement(info);
+
+    mlx_clear_window(info->mlx, info->mlx_win);
 
     x = 0;
     while (x < WINDOW_WIDTH)
     {
         initialize_ray(&info->ray, &info->player, x);
         dda(&info->ray, info);
-        dda_continue(&info->ray, x, info);
+        dda_continue(&info->ray, info);
+
+        int y = info->draw.start;
+        while (y < info->draw.end)
+        {
+            mlx_pixel_put(info->mlx, info->mlx_win, x, y, info->draw.color);
+            y++;
+        }
         x++;
     }
+    mlx_do_sync(info->mlx);
     return (0);
 }

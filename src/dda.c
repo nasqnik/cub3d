@@ -1,3 +1,5 @@
+
+ 
 #include "cub3d.h"
 
 void dda(t_ray *ray, t_info *info)
@@ -23,12 +25,12 @@ void dda(t_ray *ray, t_info *info)
             ray->hit = 1;
             break ;
         }
-        if (info->example_map[ray->map.x][ray->map.y] > 0) // change to real map, can be a char
+        if (info->example_map[ray->map.x][ray->map.y] > 0)  // change to real map, can be a char
             ray->hit = 1;
     }
 }
 
-void dda_continue(t_ray *ray, int x, t_info *info)
+void dda_continue(t_ray *ray, t_info *info)
 {
     if (ray->side == 0)
         ray->perp_wall_dist = ray->side_dist_x - ray->delta_dist_x;
@@ -38,23 +40,14 @@ void dda_continue(t_ray *ray, int x, t_info *info)
 
     // maybe change later
 
-    int drawStart = ray->line_height * (-1) / 2 + WINDOW_HEIGHT / 2;
-    if (drawStart < 0)
-        drawStart = 0;
-    int drawEnd = ray->line_height / 2 + WINDOW_HEIGHT / 2;
-    if (drawEnd >= WINDOW_HEIGHT)
-        drawEnd = WINDOW_HEIGHT - 1;
+    info->draw.start = ray->line_height * (-1) / 2 + WINDOW_HEIGHT / 2;
+    if (info->draw.start < 0)
+        info->draw.start = 0;
+    info->draw.end = ray->line_height / 2 + WINDOW_HEIGHT / 2;
+    if (info->draw.end >= WINDOW_HEIGHT)
+        info->draw.end = WINDOW_HEIGHT - 1;
 
-    int color;
+    info->draw.color = 0x00CC0000;
     if (ray->side == 1)
-        color = 0x00FF0000; 
-    else
-        color = 0x00CC0000; 
-
-    int y = drawStart;
-    while (y < drawEnd)
-    {
-        mlx_pixel_put(info->mlx, info->mlx_win, x, y, color);
-        y++;
-    }
+        info->draw.color /= 2; // random colors
 }

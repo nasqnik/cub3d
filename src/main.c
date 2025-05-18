@@ -1,3 +1,4 @@
+
 #include "cub3d.h"
 
 void initialize_mlx(t_info *info)
@@ -23,6 +24,6 @@ int main(int argc, char **argv)
 
     initialize_example_map(&info);      // delete after parsing
     initialize_cub3d(&info);            // modify after parsing
-    
+
     mlx_loop(info.mlx);
 }
