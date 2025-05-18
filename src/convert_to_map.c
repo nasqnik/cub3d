@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:51:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 19:28:13 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:17:16 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ int	convert_to_map(t_info *info)
 		i++;
 	}
 	if (info->player.x == -1)
-		return (free_partial_map(info, i + 1, "Error\nNo player found\n"));
+		return (free_partial_map(info, i, "Error\nNo player found\n"));
 	return (0);
 }

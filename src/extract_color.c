@@ -6,11 +6,25 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:38:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 19:14:33 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:12:02 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	count_commas(const char *str)
+{
+	int	count;
+	
+	count = 0;
+	while (*str)
+	{
+		if (*str == ',')
+			count++;
+		str++;
+	}
+	return (count);
+}
 
 static int	is_valid_rgb_component(const char *str)
 {
@@ -69,6 +83,8 @@ static int	parse_color(int **dest, const char *line)
 	i = 0;
 	if (*dest != NULL)
 		return (-1);
+	if (count_commas(line) != 2)
+		return (ft_error("Error\nColor must have exactly 3 components\n"));
 	trimmed_line = ft_strtrim(line, " \n\t");
 	if (!trimmed_line)
 		return (-1);
@@ -76,13 +92,6 @@ static int	parse_color(int **dest, const char *line)
 	free(trimmed_line);
 	if (!rgb)
 		return (-1);
-	while (rgb[i])
-		i++;
-	if (i != 3)
-	{
-		free_split(rgb);
-		return (ft_error("Error\nColor must have 3 components\n"));
-	}
 	if (validate_and_convert_rgb(dest, rgb) == -1)
 		return (-1);
 	free_split(rgb);
@@ -92,8 +101,8 @@ static int	parse_color(int **dest, const char *line)
 int	extract_color(t_info *info, char *line)
 {
 	if (ft_strnstr(line, "F", 1))
-		return parse_color(&(info->F_color), line + 1);
+		return (parse_color(&(info->F_color), line + 1));
 	if (ft_strnstr(line, "C", 1))
-		return parse_color(&(info->C_color), line + 1);
+		return (parse_color(&(info->C_color), line + 1));
 	return (-1);
 }
