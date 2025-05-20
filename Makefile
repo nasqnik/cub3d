@@ -13,10 +13,19 @@ SRCS_FILES	= 	check_lines_before_map.c \
 				get_scene_elements.c \
 				is_valid_map.c \
 				main.c \
-				utils.c		
+				utils.c
+
+RENDER_FILES	=	render/utils.c \
+				render/render.c \
+				render/move.c \
+				render/move_checks.c \
+				render/key.c \
+				render/initialize.c \
+				render/dda.c
 
 SRCS_DIR	= 	./src/
-SRC			= 	$(addprefix $(SRCS_DIR), $(SRCS_FILES))
+SRC			= 	$(addprefix $(SRCS_DIR), $(SRCS_FILES)) \
+				$(addprefix $(SRCS_DIR), $(RENDER_FILES))
 			
 OBJ			= 	$(SRC:%.c=%.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_valid_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:49:07 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 21:59:01 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:10:50 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	is_valid_map(t_info *info)
 			return (free_partial_visited(visited, y));
 		y++;
 	}
-	if (flood_fill(info, visited, info->player.x, info->player.y) == -1)
+	if (flood_fill(info, visited, info->player.pos.x, info->player.pos.y) == -1)
 	{
 		ft_error("Error\nMap is not closed\n");
 		return (free_partial_visited(visited, y));

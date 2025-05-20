@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:54:07 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 22:05:56 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:00:45 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// int quit_program(t_info *info)
-// {
-//     mlx_destroy_window(info->mlx, info->win.mlx_win);
-// 	// if (info->map != NULL)
-// 	// 	free_array(info->map);
-// 	exit(EXIT_SUCCESS);
-// }
 
 int	ft_error(const char *message)
 {
@@ -92,12 +84,3 @@ void	free_split(char **array)
 	}
 	free(array);
 }
-
-// void	error(char *message, t_info *info)
-// {
-// 	(void)info;
-
-// 	ft_putstr_fd("Error\n", 2);
-// 	ft_putstr_fd(message, 2); 
-// 	exit(EXIT_FAILURE);
-// }

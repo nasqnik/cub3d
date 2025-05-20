@@ -3,67 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:34:53 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 22:05:56 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:12:27 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// int random_map[MAP_WIDTH][MAP_HEIGHT]=
-// {
-//     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-//     {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-//     {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-// };
-
-// void initialize_mlx(t_info *info)
-// {
-// 	info->mlx = mlx_init();
-
-// 	info->win.x = WINDOW_WIDTH;	 // example window width, change after parsing
-// 	info->win.y = WINDOW_HEIGHT;	// example window height, change after parsing
-
-// 	if (!info->mlx)
-// 		error("mlx_init failed in initialize_mlx", info);
-// 	info->win.mlx_win = mlx_new_window(info->mlx,
-// 			info->win.x, info->win.y, "cub3D");
-// 	if (!info->win.mlx_win)
-// 		error("mlx_new_window failed in initialize_mlx", info);
-// }
-
-// void initialize_map(t_info *info)
-// {
-//	 info->map = NULL;                   // real map   
-
-//     // info->example_map = random_map;     // example map
-
-//     info->map_width = MAP_WIDTH;        // change after parsing
-//     info->map_height = MAP_HEIGHT;      // change after parsing
-// }
 
 int	check_file_name(char *file_name)
 {
@@ -112,26 +59,40 @@ void	init_file_info(t_info *info)
 	info->pos_map_start = 0;
 	info->map_width = 0;
 	info->map_height = 0;
-	info->player.x = -1;
-	info->player.y = 0;
-	info->player.dir = 0;
+	info->player.pos.x = -1;
+	info->player.pos.y = 0;
+	info->player.dir.x = 0;
+	info->player.dir.y = 0;
+	info->player.direction = 0;
+}
+
+
+void initialize_mlx(t_info *info)
+{
+    info->mlx = mlx_init();       // example window height, change after parsing
+
+    if (!info->mlx)
+        ft_free_file("mlx_init failed in initialize_mlx", info);
+    info->mlx_win = mlx_new_window(info->mlx,
+            WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
+    if (!info->mlx_win)
+        ft_free_file("mlx_new_window failed in initialize_mlx", info);
 }
 
 int	main(int argc, char **argv)
 {
 	t_info	info;
 
-	(void)argc;
-	(void)argv;
 	if (argc != 2)
 		return (ft_error("Error\nWrong argument count\n"));
 	init_file_info(&info);
 	if (file_parsing(&info, argv[1]) == -1)
 		return (1);
-	ft_free_file("thanks for playing\n", &info);
-	// initialize_map(&info);
+	// ft_free_file("thanks for playing\n", &info);
+	
 	// initialize_mlx(&info);
-	// mlx_hook(info.win.mlx_win, 17, 0L, quit_program, &info);
-	// mlx_loop(info.mlx);
+    // initialize_cub3d(&info);
+
+    // mlx_loop(info.mlx);
 	printf("success\n");
 }

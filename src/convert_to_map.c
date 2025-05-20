@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_to_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:51:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 22:11:14 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:10:41 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static int	free_partial_map(t_info *info, int count, const char *message)
 
 static int	define_player_pos(t_info *info, int j, int i, char c)
 {
-	if (info->player.x != -1)
+	if (info->player.pos.x != -1)
 		return (free_partial_map(info, i + 1, "Error\nMax 1 player\n"));
-	info->player.x = j;
-	info->player.y = i;
-	info->player.dir = c;
+	info->player.pos.x = j;
+	info->player.pos.y = i;
+	info->player.direction = c;
 	info->map[i][j] = 0;
 	return (0);
 }
@@ -107,7 +107,7 @@ int	convert_to_map(t_info *info)
 			return (-1);
 		i++;
 	}
-	if (info->player.x == -1)
+	if (info->player.pos.x == -1)
 		return (free_partial_map(info, i, "Error\nNo player found\n"));
 	return (0);
 }
