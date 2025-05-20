@@ -6,7 +6,7 @@
 /*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:02:27 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/20 12:03:23 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/20 12:20:07 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 
 # include "../lib/libft/libft.h"
 # include "../lib/ft_printf/ft_printf.h"
+
+# if __APPLE__
 # include "../mlx/mlx.h"
+# elif __linux__
+#  include "../mlx_linux/mlx.h"
+# endif
+
 
 # include <fcntl.h>
 # include <stdio.h>
@@ -33,6 +39,7 @@
 # define COL_BUFFER 0.15 	// collision buffer before the wall
 # define SPEED_ROT 0.7
 
+# if __APPLE__
 # define ESC_KEY 53
 # define W_KEY 13
 # define A_KEY 0
@@ -40,6 +47,15 @@
 # define D_KEY 2
 # define RIGHT_ARROW 124
 # define LEFT_ARROW 123
+# elif __linux__
+#  define ESC_KEY 65307
+#  define W_KEY 119
+#  define A_KEY 97
+#  define S_KEY 115
+#  define D_KEY 100
+#  define RIGHT_ARROW 65363
+#  define LEFT_ARROW 65361
+# endif
 
 typedef enum s_direction
 {

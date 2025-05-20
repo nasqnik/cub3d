@@ -31,9 +31,17 @@ OBJ			= 	$(SRC:%.c=%.o)
 
 LIBFT		=	lib/libft/libft.a
 FT_PRINTF	=	lib/ft_printf/libftprintf.a
-MLX			=	mlx/libmlx.a
+MLX_DIR 	= mlx
+MLX 		= $(MLX_DIR)/libmlx.a
+MFLAGS 		= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
-all:		libft ft_printf $(NAME)
+ifeq ($(shell uname), Linux)
+	MLX_DIR = mlx_linux
+	MLX = $(MLX_DIR)/libmlx.a
+	MFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
+endif
+
+all:		libft ft_printf $(MLX) $(NAME)
 
 $(NAME):	$(OBJ) $(MLX) 
 			$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(FT_PRINTF) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
@@ -48,7 +56,7 @@ ft_printf:
 			@$(MAKE) -C lib/ft_printf/
 
 $(MLX):
-			@$(MAKE) -C mlx/
+			@$(MAKE) -C $(MLX_DIR)
 
 clean:
 			@$(RM) $(OBJ)
