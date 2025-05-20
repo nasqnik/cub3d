@@ -6,7 +6,7 @@
 /*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:34:53 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/20 12:12:27 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/20 18:57:09 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,17 @@ void	init_file_info(t_info *info)
 	info->player.direction = 0;
 }
 
-
+    
 void initialize_mlx(t_info *info)
 {
-    info->mlx = mlx_init();       // example window height, change after parsing
+	info->mlx = NULL;
+	info->mlx_win = NULL;
+    info->mlx = mlx_init();
 
     if (!info->mlx)
         ft_free_file("mlx_init failed in initialize_mlx", info);
-    info->mlx_win = mlx_new_window(info->mlx,
-            WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
+	info->mlx_win = mlx_new_window(info->mlx,
+				WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
     if (!info->mlx_win)
         ft_free_file("mlx_new_window failed in initialize_mlx", info);
 }
@@ -88,11 +90,10 @@ int	main(int argc, char **argv)
 	init_file_info(&info);
 	if (file_parsing(&info, argv[1]) == -1)
 		return (1);
-	// ft_free_file("thanks for playing\n", &info);
 	
-	// initialize_mlx(&info);
-    // initialize_cub3d(&info);
+	initialize_mlx(&info);
+    initialize_cub3d(&info);
 
-    // mlx_loop(info.mlx);
+    mlx_loop(info.mlx);
 	printf("success\n");
 }

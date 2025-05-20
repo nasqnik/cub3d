@@ -48,8 +48,8 @@ int check_map_boundaries(t_info *info, t_move *move)
 	int	wall_x;
 	int	wall_y;
 
-	if (move->new.y < 0.2 || move->new.y >= info->map_height - 0.2 || move->new.x < 0.2
-		|| move->new.x >= move->map_new_y_len - 0.2) // can be changed to COL_BUFFER
+	if (move->new.y < 0.1 || move->new.y >= info->map_height - 0.1 || move->new.x < 0.1
+		|| move->new.x >= move->map_new_y_len - 0.1) // can be changed to COL_BUFFER
 		return (1);
 	if (move->new.x < 0 || move->new.x >= move->map_new_y_len || move->current.x < 0
 		|| move->current.x >= move->map_new_y_len)
@@ -72,8 +72,11 @@ int check_map_position(t_info *info, t_move *move)
     if (move->new.y < 0 || move->new.y >= info->map_height || move->current.y < 0 || 
         move->current.y >= info->map_height) // >= or just >?
         return (1);
-    move->map_cur_y_len = ft_strlen(info->map[move->current.y]); // check with our map
-    move->map_new_y_len = ft_strlen(info->map[move->new.y]);     // check with our map
+    // move->map_cur_y_len = ft_strlen(info->map[move->current.y]); // check with our map
+    // move->map_new_y_len = ft_strlen(info->map[move->new.y]);     // check with our map
+
+	move->map_cur_y_len = info->map_height;
+	move->map_new_y_len = info->map_height;
 
     if (check_map_boundaries(info, move))
         return (1);

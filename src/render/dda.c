@@ -25,7 +25,7 @@ void dda(t_ray *ray, t_info *info)
             ray->hit = 1;
             break ;
         }
-        if (info->map[ray->map.x][ray->map.y] > 0)  // change to real map, can be a char
+        if (info->map[ray->map.y][ray->map.x] > 0)  // change to real map, can be a char
             ray->hit = 1;
     }
 }

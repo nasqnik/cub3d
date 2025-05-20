@@ -6,7 +6,7 @@
 /*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:02:27 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/20 12:20:07 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:06:56 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 # define WINDOW_WIDTH 640 	// example window width
 # define WINDOW_HEIGHT 480 	// example window height
-# define COL_BUFFER 0.15 	// collision buffer before the wall
+# define COL_BUFFER 0.01 	// collision buffer before the wall
 # define SPEED_ROT 0.7
 
 # if __APPLE__
