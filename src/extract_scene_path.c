@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:37:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 22:05:36 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/21 20:37:13 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,19 @@ static int	parse_texture(char **dest, const char *line)
 
 int	extract_scene_path(t_info *info, char *line)
 {
-	if (ft_strnstr(line, "NO", 2))
-		return (parse_texture(&info->no_path, line + 2));
-	if (ft_strnstr(line, "SO", 2))
-		return (parse_texture(&info->so_path, line + 2));
-	if (ft_strnstr(line, "WE", 2))
-		return (parse_texture(&info->we_path, line + 2));
-	if (ft_strnstr(line, "EA", 2))
-		return (parse_texture(&info->ea_path, line + 2));
+	char	*tmp_line;
+	
+	tmp_line = ft_strnstr(line, "NO", ft_strlen(line));
+	if (tmp_line)
+		return (parse_texture(&info->no_path, tmp_line + 2));
+	tmp_line = ft_strnstr(line, "SO", ft_strlen(line));
+	if (tmp_line)
+		return (parse_texture(&info->so_path, tmp_line + 2));
+	tmp_line = ft_strnstr(line, "WE", ft_strlen(line));
+	if (tmp_line)
+		return (parse_texture(&info->we_path, tmp_line + 2));
+	tmp_line = ft_strnstr(line, "EA", ft_strlen(line));
+	if (tmp_line)
+		return (parse_texture(&info->ea_path, tmp_line + 2));
 	return (-1);
 }

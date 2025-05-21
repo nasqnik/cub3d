@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:39:37 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 22:00:27 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/21 20:39:33 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,23 @@
 
 static int	is_scene_identifier(const char *line)
 {
+	size_t	line_len;
+	
+	line_len = ft_strlen(line);
 	return (
-		ft_strnstr(line, "NO", 2) != NULL
-		|| ft_strnstr(line, "SO", 2) != NULL
-		|| ft_strnstr(line, "WE", 2) != NULL
-		|| ft_strnstr(line, "EA", 2) != NULL);
+		ft_strnstr(line, "NO", line_len) != NULL
+		|| ft_strnstr(line, "SO", line_len) != NULL
+		|| ft_strnstr(line, "WE", line_len) != NULL
+		|| ft_strnstr(line, "EA", line_len) != NULL);
 }
 
 static int	is_color_identifier(const char *line)
 {
-	return (ft_strnstr(line, "C", 1) != NULL
-		|| ft_strnstr(line, "F", 1) != NULL);
+	size_t	line_len;
+	
+	line_len = ft_strlen(line);
+	return (ft_strnstr(line, "C", line_len) != NULL
+		|| ft_strnstr(line, "F", line_len) != NULL);
 }
 
 int	is_not_empty_line(const char *line)

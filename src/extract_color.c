@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:38:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/18 22:05:56 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/21 20:33:19 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,13 @@ static int	parse_color(int **dest, const char *line)
 
 int	extract_color(t_info *info, char *line)
 {
-	if (ft_strnstr(line, "F", 1))
-		return (parse_color(&(info->f_color), line + 1));
-	if (ft_strnstr(line, "C", 1))
-		return (parse_color(&(info->c_color), line + 1));
+	char *new_line;
+
+	new_line = ft_strnstr(line, "F", ft_strlen(line));
+	if (new_line)
+		return (parse_color(&(info->f_color), new_line + 1));
+	new_line = ft_strnstr(line, "C", ft_strlen(line));
+	if (new_line)
+		return (parse_color(&(info->c_color), new_line + 1));
 	return (-1);
 }
