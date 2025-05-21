@@ -6,7 +6,7 @@
 /*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:02:27 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/20 19:06:56 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/21 09:27:40 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct s_info
 	void		*mlx_win;
 	
 	int			row_count;
-	char			**map;			//malloc'd
+	int 		**map;			//malloc'd
 	char		*map_name;		// map name from argument av[1]
 	
 	int			map_width;		// real map width

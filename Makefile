@@ -48,7 +48,7 @@ endif
 
 all:		libft ft_printf $(MLX) $(NAME)
 
-$(NAME):	$(OBJ) $(MLX) 
+$(NAME):	$(OBJ) $(MLX) $(HEADER) 
 			$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(FT_PRINTF) $(MFLAGS) -o $(NAME)
 
 %.o:		%.c $(HEADER)
