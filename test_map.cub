@@ -1,11 +1,12 @@
 
 
 
-NO    ./src/texture1.txt  
-SO ./src/texture1.txt
-WE ./src/texture1.txt
-     
-EA ./src/texture1.txt
+NO               tex/Bark.xpm          
+SO      tex/Stone.xpm
+EA      tex/TreeRings.xpm
+
+
+WE      tex/Grass.xpm 
 F 220,100,0
 C 225,30,0 
 
