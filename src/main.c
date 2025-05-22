@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:34:53 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 19:42:21 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/22 20:23:52 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void initialize_mlx(t_info *info)
 	info->_addr = mlx_get_data_addr(info->_img, &bpp, &line_length, &endian);
 	if (!info->_addr)
         ft_free_file("mlx_get_data_addr failed in initialize_mlx", info); // + destroy image
+	initialize_textures(info);
 	load_textures(info);
 }
 

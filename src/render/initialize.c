@@ -46,7 +46,6 @@ void initialize_cub3d(t_info *info)
 
     initialize_player(info);
     initialize_keys(info);
-    initialize_textures(info);
 
     mlx_hook(info->mlx_win, 17, 0L, quit_program, info);
     mlx_hook(info->mlx_win, 2, 1L<<0, key_press, info);

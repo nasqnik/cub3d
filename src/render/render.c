@@ -105,7 +105,7 @@ int render_cub3d(t_info *info)
             int d = y * 256 - WINDOW_HEIGHT * 128 + ray->line_height * 128;
             int tex_y = ((d * tex->img_height) / ray->line_height) / 256;
 
-            int color = tex->data[tex->img_height * tex_y + tex_x];
+            int color = tex->data[tex->img_width * tex_y + tex_x];
             ((int *)info->_addr)[y * WINDOW_WIDTH + x] = color;
             y++;
         }
