@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_checks.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/22 21:33:37 by saherrer          #+#    #+#             */
+/*   Updated: 2025/05/22 21:33:48 by saherrer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 // static int check_collision_x(t_info *info, t_move *move)
@@ -12,8 +24,8 @@
 // 	}
 //     else
 //     {
-//         wall_cell_x = (int)(move->new.x) - 1;
-//         wall_dist_x = move->new.x - (wall_cell_x + 1);
+//		 wall_cell_x = (int)(move->new.x) - 1;
+//		 wall_dist_x = move->new.x - (wall_cell_x + 1);
 //     }
 //     if (wall_dist_x <= COL_BUFFER && info->map[move->current.y][wall_cell_x] == 1) // || info->map[move->current.y][wall_cell_x] != '1')
 // 		return (1);
@@ -65,23 +77,23 @@
 // }
 
 
-int check_map_position(t_info *info, t_move *move)
+int	check_map_position(t_info *info, t_move *move)
 {
-    if (move->new.y < 0 || move->new.y >= info->map_height || move->current.y < 0 || 
-        move->current.y >= info->map_height) // >= or just >?
-        return (1);
-    // move->map_cur_y_len = ft_strlen(info->map[move->current.y]); // check with our map
-    // move->map_new_y_len = ft_strlen(info->map[move->new.y]);     // check with our map
+	if (move->new.y < 0 || move->new.y >= info->map_height || move->current.y < 0 || 
+		move->current.y >= info->map_height) // >= or just >?
+		return (1);
+	// move->map_cur_y_len = ft_strlen(info->map[move->current.y]); // check with our map
+	// move->map_new_y_len = ft_strlen(info->map[move->new.y]);	 // check with our map
 
 	move->map_cur_y_len = info->map_width;
 	move->map_new_y_len = info->map_width; // it should be width, because it's the length of the row
 
-    // if (check_map_boundaries(info, move))
-    //     return (1);
-    if (info->map[move->current.y][move->new.x] != 1 ) //&& !check_collision_x(info, move)
+	// if (check_map_boundaries(info, move))
+	//	 return (1);
+	if (info->map[move->current.y][move->new.x] != 1 ) //&& !check_collision_x(info, move)
 		info->player.pos.x += move->step.x;
-    if (info->map[move->new.y][move->current.x] != 1 ) //&& !check_collision_y(info, move)
+	if (info->map[move->new.y][move->current.x] != 1 ) //&& !check_collision_y(info, move)
 		info->player.pos.y += move->step.y;
 
-    return (0);
+	return (0);
 }

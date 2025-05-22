@@ -10,19 +10,20 @@ SRCS_FILES	= 	check_lines_before_map.c \
 				create_local_file_copy.c \
 				extract_color.c \
 				extract_scene_path.c \
+				free_file_map_split.c \
 				get_scene_elements.c \
 				is_valid_map.c \
-				main.c \
-				utils.c
+				main.c
 
-RENDER_FILES	=	render/utils.c \
-				render/render.c \
-				render/move.c \
-				render/move_checks.c \
-				render/key.c \
+RENDER_FILES	=	render/dda.c \
 				render/initialize.c \
-				render/dda.c \
-				render/textures.c
+				render/key.c \
+				render/move_checks.c \
+				render/move.c \
+				render/render.c \
+				render/select_texture.c \
+				render/textures.c \
+				render/utils.c
 
 SRCS_DIR	= 	./src/
 SRC			= 	$(addprefix $(SRCS_DIR), $(SRCS_FILES)) \

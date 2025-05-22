@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:02:27 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 19:38:06 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/22 22:27:47 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@
 # include "../lib/ft_printf/ft_printf.h"
 
 # if __APPLE__
-# include "../mlx/mlx.h"
+#  include "../mlx/mlx.h"
 # elif __linux__
 #  include "../mlx_linux/mlx.h"
 # endif
 
-
 # include <fcntl.h>
 # include <stdio.h>
-#include <stdlib.h> 
-#include <math.h>
-#include <sys/time.h>
+# include <stdlib.h> 
+# include <math.h>
+# include <sys/time.h>
 
 # define MAP_WIDTH 24 		// example map width
 # define MAP_HEIGHT 24 		// example map hight
@@ -40,14 +39,19 @@
 # define COL_BUFFER 0.01 	// collision buffer before the wall
 # define SPEED_ROT 0.7
 
+# define NO 0
+# define SO 1
+# define EA 2
+# define WE 3
+
 # if __APPLE__
-# define ESC_KEY 53
-# define W_KEY 13
-# define A_KEY 0
-# define S_KEY 1
-# define D_KEY 2
-# define RIGHT_ARROW 124
-# define LEFT_ARROW 123
+#  define ESC_KEY 53
+#  define W_KEY 13
+#  define A_KEY 0
+#  define S_KEY 1
+#  define D_KEY 2
+#  define RIGHT_ARROW 124
+#  define LEFT_ARROW 123
 # elif __linux__
 #  define ESC_KEY 65307
 #  define W_KEY 119
@@ -96,29 +100,28 @@ typedef struct s_player
 
 typedef struct s_move
 {
-    t_vector step;
-	t_point_int new;
-	t_point_int current;
-	int map_cur_y_len;
-	int map_new_y_len;
+	t_vector	step;
+	t_point_int	new;
+	t_point_int	current;
+	int			map_cur_y_len;
+	int			map_new_y_len;
 }				t_move;
 
 typedef struct s_ray
 {
-	int				hit;			// did the ray hit a wall?
-	double	    	camera_x;
-	t_vector		dir;			// direction vector
+	int				hit;			
+	double			camera_x;
+	t_vector		dir;			
 	t_point_int		map;			// which box of the map we're in
-	double			side_dist_x; 	// length of ray from current position to next x or y-side
+	double			side_dist_x;	// length of ray from current position
 	double			side_dist_y;
-	double			delta_dist_x; 	// length of ray from one x or y-side to next x or y-side
+	double			delta_dist_x;	// length of ray from one x or y-side
 	double			delta_dist_y;
 	double			perp_wall_dist;
-	int				step_x;		    // what direction to step in x or y-direction (either +1 or -1)
+	int				step_x;			// what direction to step in x or y-directi
 	int				step_y;
-	int				side;			// If an x-side was hit, side is set to 0, if an y-side was hit, side will be 1
+	int				side;			// If an x-side was hit, side is set to 0,
 	int				line_height;
-	
 }				t_ray;
 
 typedef struct s_draw
@@ -151,30 +154,24 @@ typedef struct s_info
 {
 	void		*mlx;
 	void		*mlx_win;
-	
+
 	int			row_count;
-	int 		**map;			//malloc'd
-	
+	int			**map;			//malloc'd
 	int			map_width;		// real map width
 	int			map_height;		// real map height <--- update to row_count
-
 	t_player	player;
-	
-	
 	t_ray		ray;
 	t_draw		draw;
 	t_keys		keys;
-	t_texture 	textures[8];
-	
+	t_texture	textures[4];
+
 	char		**file_copy;	// local copy - malloc'd
 	char		*no_path;		//malloc'd
 	char		*so_path;		//malloc'd
 	char		*we_path;		//malloc'd
 	char		*ea_path;		//malloc'd
-	
 	int			*f_color;		//malloc'd
 	int			*c_color;		//malloc'd
-	
 	int			element_count;
 	int			pos_last_element;
 	int			pos_map_start;
@@ -190,61 +187,69 @@ typedef struct s_info
 }			t_info;
 
 // check_lines_before_map.c
-int		check_lines_before_map(t_info *info);
+int			check_lines_before_map(t_info *info);
 
 // convert_to_map.c
-int		convert_to_map(t_info *info);
+int			convert_to_map(t_info *info);
 
 // create_local_file_copy.c
-int		create_local_file_copy(t_info *info, char *file_name);
+int			create_local_file_copy(t_info *info, char *file_name);
 
 // extract_color.c
-int		extract_color(t_info *info, char *line);
+int			extract_color(t_info *info, char *line);
 
 // extract_scene_path.c
-int		extract_scene_path(t_info *info, char *line);
+int			extract_scene_path(t_info *info, char *line);
 
 // get_scene_elements.c
-int		is_not_empty_line(const char *line);
-int		get_scene_elements(t_info *info);
+int			is_not_empty_line(const char *line);
+int			get_scene_elements(t_info *info);
 
 // is_valid_map.c
-int		is_valid_map(t_info *info);
+int			is_valid_map(t_info *info);
 
 // utils.c
-int		ft_error(const char *message);
-int		ft_free_file(const char *message, t_info *info);
-void	free_split(char **array);
+int			ft_error(const char *message);
+int			ft_free_file(const char *message, t_info *info);
+void		free_split(char **array);
 
-
-// ana's files
-
-// utils.c
-int quit_program(t_info *info);
-double current_time(void);
-
-// initialize.c
-void initialize_cub3d(t_info *info);
-
-// render.c
-int render_cub3d(t_info *info);
+// render files
 
 // dda.c
-void dda(t_ray *ray, t_info *info);
-void dda_continue(t_ray *ray, t_info *info);
+void		dda(t_ray *ray, t_info *info);
+void		dda_continue(t_ray *ray, t_info *info);
+
+// initialize.c
+void		initialize_cub3d(t_info *info);
 
 // move.c
-void handle_movement(t_info *info);
+void		handle_movement(t_info *info);
 
 // move_checks.c
-int check_map_position(t_info *info, t_move *move);
+int			check_map_position(t_info *info, t_move *move);
 
 // key.c
-int key_press(int keycode, t_info *info);
-int key_release(int keycode, t_info *info);
+int			key_press(int keycode, t_info *info);
+int			key_release(int keycode, t_info *info);
+
+// render.c
+int			render_cub3d(t_info *info);
+
+// select_texture.c
+t_texture	*select_texture(t_info *info, t_ray *ray);
+int			calculate_tex_x(t_ray *ray, t_texture *tex, t_info *info);
+void		draw_ceiling(t_info *info, int x, int y_start, int y_end);
+void		draw_wall(t_info *info, int x, t_texture *tex, int tex_x);
+void		draw_floor(t_info *info, int x, int y_start, int y_end);
 
 // textures.c
-void	load_textures(t_info *info);
-void	initialize_textures(t_info *info);
+void		destroy_textures(t_info *info);
+void		load_textures(t_info *info);
+void		initialize_textures(t_info *info);
+
+// utils.c
+int			quit_program(t_info *info);
+int			quit_program_message(char *message, t_info *info);
+double		current_time(void);
 
 #endif

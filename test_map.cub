@@ -1,12 +1,12 @@
 
 
 
-NO               tex/Bark.xpm          
+NO               tex/Stone.xpm       
 SO      tex/Stone.xpm
-EA      tex/TreeRings.xpm
+EA      tex/Stone.xpm   
 
 
-WE      tex/Grass.xpm 
+WE      tex/Stone.xpm
 F 220,100,0
 C 225,30,0 
 

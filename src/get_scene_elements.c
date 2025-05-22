@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:39:37 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/21 20:39:33 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/22 22:26:37 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	is_scene_identifier(const char *line)
 {
 	size_t	line_len;
-	
+
 	line_len = ft_strlen(line);
 	return (
 		ft_strnstr(line, "NO", line_len) != NULL
@@ -27,7 +27,7 @@ static int	is_scene_identifier(const char *line)
 static int	is_color_identifier(const char *line)
 {
 	size_t	line_len;
-	
+
 	line_len = ft_strlen(line);
 	return (ft_strnstr(line, "C", line_len) != NULL
 		|| ft_strnstr(line, "F", line_len) != NULL);

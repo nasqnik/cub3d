@@ -1,9 +1,10 @@
-NO    ./cub3D
-SO ./src/texture1.txt
-WE ./src/texture1.txt
-     
-EA ./src/texture1.txt
-F 220,100,0
+NO               tex/Stone.xpm       
+SO      tex/Stone.xpm
+EA      tex/Stone.xpm   
+
+
+WE      tex/Stone.xpm
+F 220,100,0a
 C 225,30,0 
 
 

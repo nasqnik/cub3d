@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 21:34:53 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 20:23:52 by saherrer         ###   ########.fr       */
+/*   Created: 2025/05/22 22:01:39 by saherrer          #+#    #+#             */
+/*   Updated: 2025/05/22 22:26:20 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,31 +66,29 @@ void	init_file_info(t_info *info)
 	info->player.direction = 0;
 }
 
-    
-void initialize_mlx(t_info *info)
+void	initialize_mlx(t_info *info)
 {
-	int bpp;
-	int line_length;
-	int endian;
-	
+	int	bpp;
+	int	line_length;
+	int	endian;
+
 	info->mlx = NULL;
 	info->mlx_win = NULL;
 	info->_img = NULL;
 	info->_addr = NULL;
-    info->mlx = mlx_init();
-    if (!info->mlx)
-        ft_free_file("mlx_init failed in initialize_mlx", info);
+	info->mlx = mlx_init();
+	if (!info->mlx)
+		quit_program_message("mlx_init failed\n", info);
 	info->mlx_win = mlx_new_window(info->mlx,
-				WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
-    if (!info->mlx_win)
-        ft_free_file("mlx_new_window failed in initialize_mlx", info);
-	
+			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
+	if (!info->mlx_win)
+		quit_program_message("mlx_new_window failed\n", info);
 	info->_img = mlx_new_image(info->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!info->_img)
-        ft_free_file("mlx_new_image failed in initialize_mlx", info); // + destroy window
+		quit_program_message("mlx_new_image failed\n", info);
 	info->_addr = mlx_get_data_addr(info->_img, &bpp, &line_length, &endian);
 	if (!info->_addr)
-        ft_free_file("mlx_get_data_addr failed in initialize_mlx", info); // + destroy image
+		quit_program_message("mlx_get_data_addr failed\n", info);
 	initialize_textures(info);
 	load_textures(info);
 }
@@ -104,12 +102,8 @@ int	main(int argc, char **argv)
 	init_file_info(&info);
 	if (file_parsing(&info, argv[1]) == -1)
 		return (1);
-	
 	initialize_mlx(&info);
-    initialize_cub3d(&info);
-
-    mlx_loop(info.mlx);
+	initialize_cub3d(&info);
+	mlx_loop(info.mlx);
 	printf("success\n");
 }
-
-

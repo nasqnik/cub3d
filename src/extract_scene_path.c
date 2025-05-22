@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:37:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/21 20:37:13 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/22 22:26:54 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	parse_texture(char **dest, const char *line)
 	int		fd;
 	char	*trimmed_line;
 
-	fd = 0;
 	if (*dest != NULL)
 		return (-1);
 	trimmed_line = ft_strtrim(line, " \t\n");
@@ -27,6 +26,9 @@ static int	parse_texture(char **dest, const char *line)
 	free(trimmed_line);
 	if (!*dest)
 		return (-1);
+	if (ft_strlen(*dest) < 5
+		|| ft_strncmp(*dest + ft_strlen(*dest) - 4, ".xpm", 4))
+		return (ft_error("Error\nTexture file has incorrect extension\n"));
 	fd = open (*dest, O_RDONLY);
 	if (fd == -1)
 		return (ft_error("Error\nTexture file not found\n"));
@@ -37,7 +39,7 @@ static int	parse_texture(char **dest, const char *line)
 int	extract_scene_path(t_info *info, char *line)
 {
 	char	*tmp_line;
-	
+
 	tmp_line = ft_strnstr(line, "NO", ft_strlen(line));
 	if (tmp_line)
 		return (parse_texture(&info->no_path, tmp_line + 2));
