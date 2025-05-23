@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:38:47 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 22:27:16 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:38:27 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	is_valid_rgb_component(const char *str)
 {
 	int	value;
 
-	while (*str == ' ' || *str == '\t')
+	while (*str && (*str == ' ' || *str == '\t'))
 		str++;
 	if (!*str)
 		return (0);
@@ -61,7 +61,7 @@ static int	validate_and_convert_rgb(int **dest, char **rgb)
 	}
 	while (i < 3)
 	{
-		if (!is_valid_rgb_component(rgb[i]))
+		if (!rgb[i] || !is_valid_rgb_component(rgb[i]))
 		{
 			free(*dest);
 			*dest = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_valid_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:49:07 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 19:41:20 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/23 20:41:52 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,34 @@ static int	flood_fill(t_info *info, int **visited, int x, int y)
 		return (-1);
 	return (0);
 }
+int	is_map_enclosed(int **map, int width, int height)
+{
+	int	x;
+	int	y;
 
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			if (map[y][x] == 0)
+			{
+				if (y - 1 < 0 || map[y - 1][x] == -1)
+					return (0);
+				if (y + 1 >= height || map[y + 1][x] == -1)
+					return (0);
+				if (x - 1 < 0 || map[y][x - 1] == -1)
+					return (0);
+				if (x + 1 >= width || map[y][x + 1] == -1)
+					return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
 int	is_valid_map(t_info *info)
 {
 	int	**visited;
@@ -68,5 +95,7 @@ int	is_valid_map(t_info *info)
 		return (free_partial_visited(visited, y));
 	}
 	free_partial_visited(visited, y);
+	if (!is_map_enclosed(info->map, info->map_width, info->map_height))
+		return (ft_error("Error\nMap is not closed\n"));
 	return (0);
 }

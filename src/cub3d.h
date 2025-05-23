@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:02:27 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 22:27:47 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/23 20:17:03 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ typedef struct s_ray
 
 typedef struct s_draw
 {
-	int			start;
-	int			end;
+	double		start;
+	double		end;
 	int			color;
 
 }				t_draw;

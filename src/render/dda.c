@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:29:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 21:30:31 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/23 20:23:19 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ void	dda_continue(t_ray *ray, t_info *info)
 		ray->perp_wall_dist = ray->side_dist_x - ray->delta_dist_x;
 	else
 		ray->perp_wall_dist = ray->side_dist_y - ray->delta_dist_y;
+	if (ray->perp_wall_dist <= 0.0001)
+		ray->perp_wall_dist = 0.0001;
 	ray->line_height = (int)(WINDOW_HEIGHT / ray->perp_wall_dist);
+	if (ray->line_height > WINDOW_HEIGHT * 10)
+		ray->line_height = WINDOW_HEIGHT * 10;
 	info->draw.start = ray->line_height * (-1) / 2 + WINDOW_HEIGHT / 2;
 	if (info->draw.start < 0)
 		info->draw.start = 0;
