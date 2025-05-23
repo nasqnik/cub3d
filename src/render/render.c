@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:15:31 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 21:25:09 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:59:51 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,17 @@ static void	initialize_ray(t_ray *ray, t_player *player, int x)
 {
 	ray->hit = 0;
 	ray->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
-	ray->dir.x = player->dir.x + player->camera_plane.x * ray->camera_x;
-	ray->dir.y = player->dir.y + player->camera_plane.y * ray->camera_x;
+	ray->dir.x = player->dir.x + player->camera.x * ray->camera_x;
+	ray->dir.y = player->dir.y + player->camera.y * ray->camera_x;
 	ray->map = (t_point_int){(int)player->pos.x, (int)player->pos.y};
-	ray->delta_dist_x = fabs(1 / ray->dir.x);
-	ray->delta_dist_y = fabs(1 / ray->dir.y);
+	if (ray->dir.x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1 / ray->dir.x);
+	if (ray->dir.y == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->dir.y);
 	initialize_step_side(ray, player);
 }
 
@@ -55,7 +61,7 @@ void	update_time_speed(t_info *info)
 	info->old_time = info->time;
 	info->time = current_time();
 	info->delta_time = (info->time - info->old_time) / 1000.0;
-	info->move_speed = info->delta_time * 30.0;
+	info->move_speed = info->delta_time * 60.0;
 	info->rot_speed = info->delta_time * 3.0;
 }
 
@@ -66,10 +72,10 @@ void	render_column(t_info *info, int x)
 	t_texture	*tex;
 	int			tex_x;
 
-	initialize_ray(&info->ray, &info->player, x);
-	dda(&info->ray, info);
-	dda_continue(&info->ray, info);
 	ray = &info->ray;
+	initialize_ray(ray, &info->player, x);
+	dda(ray, info);
+	dda_continue(ray, info);
 	tex = select_texture(info, ray);
 	tex_x = calculate_tex_x(ray, tex, info);
 	y = 0;

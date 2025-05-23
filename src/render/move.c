@@ -36,34 +36,38 @@ static void	rotate_player(t_info *info, t_player *player, t_direction direction)
 	old_dir_x = player->dir.x;
 	player->dir.x = player->dir.x * cos_rot - player->dir.y * sin_rot;
 	player->dir.y = old_dir_x * sin_rot + player->dir.y * cos_rot;
-	old_plane_x = player->camera_plane.x;
-	player->camera_plane.x = player->camera_plane.x * cos_rot - player->camera_plane.y * sin_rot;
-	player->camera_plane.y = old_plane_x * sin_rot + player->camera_plane.y * cos_rot;
+	old_plane_x = player->camera.x;
+	player->camera.x = player->camera.x * cos_rot - player->camera.y * sin_rot;
+	player->camera.y = old_plane_x * sin_rot + player->camera.y * cos_rot;
 }
 
-static void	calculate_movement(t_info *info, t_move *move, t_direction direction)
+static void	calculate_movement(t_info *info, t_move *move, t_direction dir)
 {
-	if (direction == FORWARD)
+	double	coeff;
+
+	coeff = (info->move_speed * info->delta_time);
+	if (dir == FORWARD)
 	{
-		move->step.x = info->player.dir.x * (info->move_speed * info->delta_time);
-		move->step.y = info->player.dir.y * (info->move_speed * info->delta_time);
+		move->step.x = info->player.dir.x * coeff;
+		move->step.y = info->player.dir.y * coeff;
 	}
-	else if (direction == BACKWARD)
+	else if (dir == BACKWARD)
 	{
-		move->step.x = -info->player.dir.x * (info->move_speed * info->delta_time);
-		move->step.y = -info->player.dir.y * (info->move_speed * info->delta_time);
+		move->step.x = -info->player.dir.x * coeff;
+		move->step.y = -info->player.dir.y * coeff;
 	}
-	else if (direction == LEFT)
+	else if (dir == LEFT)
 	{
-		move->step.x = -info->player.camera_plane.x * (info->move_speed * info->delta_time);
-		move->step.y = -info->player.camera_plane.y * (info->move_speed * info->delta_time);
+		move->step.x = -info->player.camera.x * coeff;
+		move->step.y = -info->player.camera.y * coeff;
 	}
-	else if (direction == RIGHT)
+	else if (dir == RIGHT)
 	{
-		move->step.x = info->player.camera_plane.x * (info->move_speed * info->delta_time);
-		move->step.y = info->player.camera_plane.y * (info->move_speed * info->delta_time);
+		move->step.x = info->player.camera.x * coeff;
+		move->step.y = info->player.camera.y * coeff;
 	}
 }
+
 static void	update_position(t_info *info)
 {
 	static t_point_double	prev = (t_point_double){-1, -1};
@@ -92,8 +96,8 @@ static void	update_position(t_info *info)
 
 static void	apply_movement(t_info *info, t_move *move)
 {
-	double new_x;
-	double new_y;
+	double	new_x;
+	double	new_y;
 
 	new_x = info->player.pos.x + move->step.x;
 	new_y = info->player.pos.y + move->step.y;
@@ -108,8 +112,8 @@ static void	apply_movement(t_info *info, t_move *move)
 
 void	handle_movement(t_info *info)
 {
-	t_move move;
-	int direction;
+	t_move	move;
+	int		direction;
 
 	ft_bzero(&move, sizeof(t_move));
 	direction = -1;
@@ -125,7 +129,8 @@ void	handle_movement(t_info *info)
 		direction = ROTATE_RIGHT;
 	else if (info->keys.left)
 		direction = ROTATE_LEFT;
-	if (direction != -1 && direction != ROTATE_LEFT && direction != ROTATE_RIGHT)
+	if (direction != -1 && direction != ROTATE_LEFT
+		&& direction != ROTATE_RIGHT)
 	{
 		calculate_movement(info, &move, direction);
 		apply_movement(info, &move);

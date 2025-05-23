@@ -45,6 +45,7 @@ static int	flood_fill(t_info *info, int **visited, int x, int y)
 		return (-1);
 	return (0);
 }
+
 int	is_map_enclosed(int **map, int width, int height)
 {
 	int	x;
@@ -73,6 +74,7 @@ int	is_map_enclosed(int **map, int width, int height)
 	}
 	return (1);
 }
+
 int	is_valid_map(t_info *info)
 {
 	int	**visited;

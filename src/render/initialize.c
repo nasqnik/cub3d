@@ -17,22 +17,22 @@ void	initialize_player(t_info *info)
 	if (info->player.direction == 'N')
 	{
 		info->player.dir = (t_vector){0.0, -1.0};
-		info->player.camera_plane = (t_vector){0.66, 0.0};
+		info->player.camera = (t_vector){0.66, 0.0};
 	}
 	else if (info->player.direction == 'S')
 	{
 		info->player.dir = (t_vector){0.0, 1.0};
-		info->player.camera_plane = (t_vector){-0.66, 0.0};
+		info->player.camera = (t_vector){-0.66, 0.0};
 	}
 	else if (info->player.direction == 'E')
 	{
 		info->player.dir = (t_vector){1.0, 0.0};
-		info->player.camera_plane = (t_vector){0.0, 0.66};
+		info->player.camera = (t_vector){0.0, 0.66};
 	}
 	else if (info->player.direction == 'W')
 	{
 		info->player.dir = (t_vector){-1.0, 0.0};
-		info->player.camera_plane = (t_vector){0.0, -0.66};
+		info->player.camera = (t_vector){0.0, -0.66};
 	}
 }
 

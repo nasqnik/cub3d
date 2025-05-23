@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:02:27 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/23 20:17:03 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/23 21:01:19 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 # define WINDOW_WIDTH 640 	// example window width
 # define WINDOW_HEIGHT 480 	// example window height
-# define COL_BUFFER 0.01 	// collision buffer before the wall
+# define COL_BUFFER 0.1 	// collision buffer before the wall
 # define SPEED_ROT 0.7
 
 # define NO 0
@@ -94,7 +94,7 @@ typedef struct s_player
 {
 	t_point_double	pos;				// position of the player
 	t_vector		dir;				// direction vector
-	t_vector		camera_plane;
+	t_vector		camera;
 	char			direction;	// direction of the player
 }				t_player;
 
@@ -126,9 +126,9 @@ typedef struct s_ray
 
 typedef struct s_draw
 {
-	double		start;
-	double		end;
-	int			color;
+	double			start;
+	double			end;
+	int				color;
 
 }				t_draw;
 
