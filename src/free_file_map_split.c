@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:54:07 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 22:24:03 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/23 20:49:44 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,3 @@ void	free_split(char **array)
 	}
 	free(array);
 }
-
-// void	error(char *message, t_info *info)
-// {
-// 	(void)info;
-
-// 	ft_putstr_fd("Error\n", 2);
-// 	ft_putstr_fd(message, 2); 
-// 	exit(EXIT_FAILURE);
-// }
