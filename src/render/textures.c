@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:25:54 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 22:15:59 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:17:02 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,6 @@ void	initialize_textures(t_info *info)
 	}
 }
 
-static int	texture_return(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (info->textures[i].tex == NULL)
-			return (1);
-		if (info->textures[i].data == NULL)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 void	destroy_textures(t_info *info)
 {
 	int	i;
@@ -56,38 +40,29 @@ void	destroy_textures(t_info *info)
 	}
 }
 
-static void	texture_checker(t_info *info)
-{
-	if (texture_return(info) == 1)
-	{
-		quit_program_message("Error: one of the textures is invalid\n", info);
-	}
-}
-
 void	load_textures(t_info *info)
 {
 	int		i;
-	char	*address;
 	int		bpp;
 	int		size;
 	int		endian;
+	char	*paths[4];
 
+	paths[0] = info->no_path;
+	paths[1] = info->so_path;
+	paths[2] = info->ea_path;
+	paths[3] = info->we_path;
 	i = 0;
 	while (i < 4)
 	{
-		if (i == 0)
-			address = info->no_path;
-		else if (i == 1)
-			address = info->so_path;
-		else if (i == 2)
-			address = info->ea_path;
-		else if (i == 3)
-			address = info->we_path;
-		info->textures[i].tex = mlx_xpm_file_to_image(info->mlx, address,
+		info->textures[i].tex = mlx_xpm_file_to_image(info->mlx, paths[i],
 				&info->textures[i].img_width, &info->textures[i].img_height);
-		info->textures[i].data = (int *)
-			mlx_get_data_addr(info->textures[i].tex, &bpp, &size, &endian);
+		if (!info->textures[i].tex)
+			quit_program_message("Error: texture file is invalid\n", info);
+		info->textures[i].data = (int *)mlx_get_data_addr(
+				info->textures[i].tex, &bpp, &size, &endian);
+		if (!info->textures[i].data)
+			quit_program_message("Error: texture data is invalid\n", info);
 		i++;
 	}
-	texture_checker(info);
 }

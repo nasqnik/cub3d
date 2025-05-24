@@ -6,7 +6,7 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:33:18 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 22:25:39 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:16:26 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	quit_program_message(char *message, t_info *info)
 		free(info->mlx);
 		destroy_textures(info);
 	}
-	exit(0);
+	exit(1);
 }
 
 double	current_time(void)
