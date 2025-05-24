@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   move_checks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:33:37 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/23 21:05:06 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:41:20 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	is_wall(t_info *info, double x, double y)
+static int	is_wall(t_info *info, double x, double y)
 {
 	int		map_x;
 	int		map_y;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:15:31 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/23 19:59:51 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:41:54 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	initialize_ray(t_ray *ray, t_player *player, int x)
 	initialize_step_side(ray, player);
 }
 
-void	update_time_speed(t_info *info)
+static void	update_time_speed(t_info *info)
 {
 	info->old_time = info->time;
 	info->time = current_time();
@@ -65,7 +65,7 @@ void	update_time_speed(t_info *info)
 	info->rot_speed = info->delta_time * 3.0;
 }
 
-void	render_column(t_info *info, int x)
+static void	render_column(t_info *info, int x)
 {
 	int			y;
 	t_ray		*ray;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_to_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:51:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 19:41:00 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:14:09 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static int	define_player_pos(t_info *info, int j, int i, char c)
 {
 	if (info->player.pos.x != -1)
 		return (free_partial_map(info, i + 1, "Error\nMax 1 player\n"));
-	info->player.pos.x = j;
-	info->player.pos.y = i;
+	info->player.pos.x = j + 0.5;
+	info->player.pos.y = i + 0.5;
 	info->player.direction = c;
 	info->map[i][j] = 0;
 	return (0);

@@ -6,13 +6,13 @@
 /*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:28:00 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 21:28:38 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:41:02 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	initialize_player(t_info *info)
+static void	initialize_player(t_info *info)
 {
 	if (info->player.direction == 'N')
 	{
@@ -36,7 +36,7 @@ void	initialize_player(t_info *info)
 	}
 }
 
-void	initialize_keys(t_info *info)
+static void	initialize_keys(t_info *info)
 {
 	info->keys.w = 0;
 	info->keys.a = 0;
