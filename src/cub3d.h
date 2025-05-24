@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
+/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:02:27 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/23 21:01:19 by nasqnik          ###   ########.fr       */
+/*   Updated: 2025/05/24 21:59:43 by saherrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@
 # include <math.h>
 # include <sys/time.h>
 
-# define MAP_WIDTH 24 		// example map width
-# define MAP_HEIGHT 24 		// example map hight
+# define MAP_WIDTH 24
+# define MAP_HEIGHT 24
 
 # define IMAGE_WIDTH 64
 # define IMAGE_HEIGHT 64
 
-# define WINDOW_WIDTH 640 	// example window width
-# define WINDOW_HEIGHT 480 	// example window height
-# define COL_BUFFER 0.1 	// collision buffer before the wall
+# define WINDOW_WIDTH 640
+# define WINDOW_HEIGHT 480
+# define COL_BUFFER 0.1
 # define SPEED_ROT 0.7
 
 # define NO 0
@@ -92,10 +92,10 @@ typedef struct s_vector
 
 typedef struct s_player
 {
-	t_point_double	pos;				// position of the player
-	t_vector		dir;				// direction vector
+	t_point_double	pos;
+	t_vector		dir;
 	t_vector		camera;
-	char			direction;	// direction of the player
+	char			direction;
 }				t_player;
 
 typedef struct s_move
@@ -112,15 +112,15 @@ typedef struct s_ray
 	int				hit;			
 	double			camera_x;
 	t_vector		dir;			
-	t_point_int		map;			// which box of the map we're in
-	double			side_dist_x;	// length of ray from current position
+	t_point_int		map;
+	double			side_dist_x;
 	double			side_dist_y;
-	double			delta_dist_x;	// length of ray from one x or y-side
+	double			delta_dist_x;
 	double			delta_dist_y;
 	double			perp_wall_dist;
-	int				step_x;			// what direction to step in x or y-directi
+	int				step_x;
 	int				step_y;
-	int				side;			// If an x-side was hit, side is set to 0,
+	int				side;
 	int				line_height;
 }				t_ray;
 
@@ -156,22 +156,22 @@ typedef struct s_info
 	void		*mlx_win;
 
 	int			row_count;
-	int			**map;			//malloc'd
-	int			map_width;		// real map width
-	int			map_height;		// real map height <--- update to row_count
+	int			**map;
+	int			map_width;
+	int			map_height;
 	t_player	player;
 	t_ray		ray;
 	t_draw		draw;
 	t_keys		keys;
 	t_texture	textures[4];
 
-	char		**file_copy;	// local copy - malloc'd
-	char		*no_path;		//malloc'd
-	char		*so_path;		//malloc'd
-	char		*we_path;		//malloc'd
-	char		*ea_path;		//malloc'd
-	int			*f_color;		//malloc'd
-	int			*c_color;		//malloc'd
+	char		**file_copy;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	int			*f_color;
+	int			*c_color;
 	int			element_count;
 	int			pos_last_element;
 	int			pos_map_start;
