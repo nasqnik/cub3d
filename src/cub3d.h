@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:02:27 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/24 21:59:43 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/26 11:38:15 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define WINDOW_HEIGHT 480
 # define COL_BUFFER 0.1
 # define SPEED_ROT 0.7
+# define SPEED_MOVE 2.0
 
 # define NO 0
 # define SO 1
@@ -180,8 +181,6 @@ typedef struct s_info
 	double		old_time;
 	double		delta_time;
 
-	double		move_speed;
-	double		rot_speed;
 	void		*_img;
 	char		*_addr;
 }			t_info;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:28:00 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/24 21:41:02 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/26 11:38:22 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	initialize_cub3d(t_info *info)
 	info->time = current_time();
 	info->old_time = info->time;
 	info->delta_time = 0.0;
-	info->move_speed = 0.0;
-	info->rot_speed = 0.0;
 	initialize_player(info);
 	initialize_keys(info);
 	mlx_hook(info->mlx_win, 17, 0L, quit_program, info);

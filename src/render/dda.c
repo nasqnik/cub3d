@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:29:58 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/23 20:23:19 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/26 12:16:20 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,4 @@ void	dda_continue(t_ray *ray, t_info *info)
 	info->draw.end = ray->line_height / 2 + WINDOW_HEIGHT / 2;
 	if (info->draw.end >= WINDOW_HEIGHT)
 		info->draw.end = WINDOW_HEIGHT - 1;
-	info->draw.color = 0x00CC0000;
-	if (ray->side == 1)
-		info->draw.color /= 2;
 }

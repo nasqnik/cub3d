@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:15:31 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/24 21:41:54 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/26 11:43:05 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ static void	initialize_ray(t_ray *ray, t_player *player, int x)
 	initialize_step_side(ray, player);
 }
 
-static void	update_time_speed(t_info *info)
+static void	update_time(t_info *info)
 {
 	info->old_time = info->time;
 	info->time = current_time();
 	info->delta_time = (info->time - info->old_time) / 1000.0;
-	info->move_speed = info->delta_time * 60.0;
-	info->rot_speed = info->delta_time * 3.0;
+	if (info->delta_time > 0.1)
+		info->delta_time = 0.1;
 }
 
 static void	render_column(t_info *info, int x)
@@ -88,7 +88,7 @@ int	render_cub3d(t_info *info)
 {
 	int	x;
 
-	update_time_speed(info);
+	update_time(info);
 	handle_movement(info);
 	ft_memset(info->_addr, 0, WINDOW_WIDTH * WINDOW_HEIGHT * sizeof(int));
 	x = 0;

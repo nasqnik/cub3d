@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saherrer <saherrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasqnik <nasqnik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:33:28 by saherrer          #+#    #+#             */
-/*   Updated: 2025/05/22 22:24:35 by saherrer         ###   ########.fr       */
+/*   Updated: 2025/05/26 11:34:23 by nasqnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	calculate_movement(t_info *info, t_move *move, t_direction dir)
 {
 	double	coeff;
 
-	coeff = (info->move_speed * info->delta_time);
+	coeff = (SPEED_MOVE * info->delta_time);
 	if (dir == FORWARD)
 	{
 		move->step.x = info->player.dir.x * coeff;
